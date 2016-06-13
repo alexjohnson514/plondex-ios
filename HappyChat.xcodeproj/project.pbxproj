@@ -14,6 +14,17 @@
 		387E93561D08888D0070EEA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 387E93551D08888D0070EEA7 /* Images.xcassets */; };
 		387E93591D08888D0070EEA7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387E93571D08888D0070EEA7 /* LaunchScreen.xib */; };
 		387E93651D08888D0070EEA7 /* HappyChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E93641D08888D0070EEA7 /* HappyChatTests.m */; };
+		387E93701D08962E0070EEA7 /* VendorSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E936F1D08962E0070EEA7 /* VendorSelectViewController.m */; };
+		387E93731D0897390070EEA7 /* VendorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E93721D0897390070EEA7 /* VendorTableViewCell.m */; };
+		387E93761D089B8E0070EEA7 /* VendorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E93751D089B8E0070EEA7 /* VendorDetailViewController.m */; };
+		387E93791D08B1A30070EEA7 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E93781D08B1A30070EEA7 /* ChatTableViewCell.m */; };
+		38C80B121D0DB61E00E0B01F /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B111D0DB61E00E0B01F /* Session.m */; };
+		38C80B151D0DCD6700E0B01F /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B141D0DCD6700E0B01F /* ChatViewController.m */; };
+		38C80B181D0E3C3400E0B01F /* UITextField+LeftPadding.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B171D0E3C3400E0B01F /* UITextField+LeftPadding.m */; };
+		38C80B1F1D0EB39300E0B01F /* WaitingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B1E1D0EB39300E0B01F /* WaitingTableViewCell.m */; };
+		38C80B221D0EB3E400E0B01F /* VendorDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */; };
+		38C80B251D0EC31100E0B01F /* SideMenuVendorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B241D0EC31100E0B01F /* SideMenuVendorViewController.m */; };
+		38EF76951D0C8D110082C80F /* SideMenuLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +51,28 @@
 		387E935E1D08888D0070EEA7 /* HappyChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		387E93631D08888D0070EEA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		387E93641D08888D0070EEA7 /* HappyChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappyChatTests.m; sourceTree = "<group>"; };
+		387E936E1D08962E0070EEA7 /* VendorSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorSelectViewController.h; sourceTree = "<group>"; };
+		387E936F1D08962E0070EEA7 /* VendorSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorSelectViewController.m; sourceTree = "<group>"; };
+		387E93711D0897390070EEA7 /* VendorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorTableViewCell.h; sourceTree = "<group>"; };
+		387E93721D0897390070EEA7 /* VendorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorTableViewCell.m; sourceTree = "<group>"; };
+		387E93741D089B8E0070EEA7 /* VendorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorDetailViewController.h; sourceTree = "<group>"; };
+		387E93751D089B8E0070EEA7 /* VendorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorDetailViewController.m; sourceTree = "<group>"; };
+		387E93771D08B1A30070EEA7 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
+		387E93781D08B1A30070EEA7 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
+		38C80B101D0DB61E00E0B01F /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		38C80B111D0DB61E00E0B01F /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		38C80B131D0DCD6700E0B01F /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		38C80B141D0DCD6700E0B01F /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		38C80B171D0E3C3400E0B01F /* UITextField+LeftPadding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+LeftPadding.m"; sourceTree = "<group>"; };
+		38C80B191D0E453100E0B01F /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		38C80B1D1D0EB39300E0B01F /* WaitingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitingTableViewCell.h; sourceTree = "<group>"; };
+		38C80B1E1D0EB39300E0B01F /* WaitingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitingTableViewCell.m; sourceTree = "<group>"; };
+		38C80B201D0EB3E400E0B01F /* VendorDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorDashboardViewController.h; sourceTree = "<group>"; };
+		38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorDashboardViewController.m; sourceTree = "<group>"; };
+		38C80B231D0EC31100E0B01F /* SideMenuVendorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuVendorViewController.h; sourceTree = "<group>"; };
+		38C80B241D0EC31100E0B01F /* SideMenuVendorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuVendorViewController.m; sourceTree = "<group>"; };
+		38EF76931D0C8D110082C80F /* SideMenuLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuLoginViewController.h; sourceTree = "<group>"; };
+		38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,14 +114,36 @@
 		387E93471D08888D0070EEA7 /* HappyChat */ = {
 			isa = PBXGroup;
 			children = (
+				38C80B171D0E3C3400E0B01F /* UITextField+LeftPadding.m */,
 				387E934C1D08888D0070EEA7 /* AppDelegate.h */,
 				387E934D1D08888D0070EEA7 /* AppDelegate.m */,
+				387E93771D08B1A30070EEA7 /* ChatTableViewCell.h */,
+				387E93781D08B1A30070EEA7 /* ChatTableViewCell.m */,
 				387E934F1D08888D0070EEA7 /* ViewController.h */,
 				387E93501D08888D0070EEA7 /* ViewController.m */,
+				387E93741D089B8E0070EEA7 /* VendorDetailViewController.h */,
+				387E93751D089B8E0070EEA7 /* VendorDetailViewController.m */,
 				387E93521D08888D0070EEA7 /* Main.storyboard */,
+				387E93711D0897390070EEA7 /* VendorTableViewCell.h */,
+				387E93721D0897390070EEA7 /* VendorTableViewCell.m */,
 				387E93551D08888D0070EEA7 /* Images.xcassets */,
 				387E93571D08888D0070EEA7 /* LaunchScreen.xib */,
 				387E93481D08888D0070EEA7 /* Supporting Files */,
+				387E936E1D08962E0070EEA7 /* VendorSelectViewController.h */,
+				387E936F1D08962E0070EEA7 /* VendorSelectViewController.m */,
+				38EF76931D0C8D110082C80F /* SideMenuLoginViewController.h */,
+				38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */,
+				38C80B101D0DB61E00E0B01F /* Session.h */,
+				38C80B111D0DB61E00E0B01F /* Session.m */,
+				38C80B131D0DCD6700E0B01F /* ChatViewController.h */,
+				38C80B141D0DCD6700E0B01F /* ChatViewController.m */,
+				38C80B191D0E453100E0B01F /* Const.h */,
+				38C80B1D1D0EB39300E0B01F /* WaitingTableViewCell.h */,
+				38C80B1E1D0EB39300E0B01F /* WaitingTableViewCell.m */,
+				38C80B201D0EB3E400E0B01F /* VendorDashboardViewController.h */,
+				38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */,
+				38C80B231D0EC31100E0B01F /* SideMenuVendorViewController.h */,
+				38C80B241D0EC31100E0B01F /* SideMenuVendorViewController.m */,
 			);
 			path = HappyChat;
 			sourceTree = "<group>";
@@ -168,6 +223,7 @@
 				TargetAttributes = {
 					387E93441D08888D0070EEA7 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 8JXS36Q6RX;
 					};
 					387E935D1D08888D0070EEA7 = {
 						CreatedOnToolsVersion = 6.4;
@@ -219,9 +275,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				387E93701D08962E0070EEA7 /* VendorSelectViewController.m in Sources */,
+				38EF76951D0C8D110082C80F /* SideMenuLoginViewController.m in Sources */,
+				38C80B221D0EB3E400E0B01F /* VendorDashboardViewController.m in Sources */,
 				387E93511D08888D0070EEA7 /* ViewController.m in Sources */,
+				38C80B151D0DCD6700E0B01F /* ChatViewController.m in Sources */,
+				38C80B121D0DB61E00E0B01F /* Session.m in Sources */,
+				38C80B251D0EC31100E0B01F /* SideMenuVendorViewController.m in Sources */,
+				38C80B181D0E3C3400E0B01F /* UITextField+LeftPadding.m in Sources */,
 				387E934E1D08888D0070EEA7 /* AppDelegate.m in Sources */,
+				38C80B1F1D0EB39300E0B01F /* WaitingTableViewCell.m in Sources */,
+				387E93791D08B1A30070EEA7 /* ChatTableViewCell.m in Sources */,
+				387E93761D089B8E0070EEA7 /* VendorDetailViewController.m in Sources */,
 				387E934B1D08888D0070EEA7 /* main.m in Sources */,
+				387E93731D0897390070EEA7 /* VendorTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +347,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tuan Nguyen (8JXS36Q6RX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tuan Nguyen (8JXS36Q6RX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -324,7 +392,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tuan Nguyen (8JXS36Q6RX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tuan Nguyen (8JXS36Q6RX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -349,6 +418,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tuan Nguyen (8C28669M4Q)";
 				INFOPLIST_FILE = HappyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,6 +429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tuan Nguyen (8C28669M4Q)";
 				INFOPLIST_FILE = HappyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +489,7 @@
 				387E936A1D08888D0070EEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		387E936B1D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "HappyChatTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +498,7 @@
 				387E936D1D08888D0070EEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
