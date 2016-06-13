@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "387E93441D08888D0070EEA7"
-               BuildableName = "HappyChat.app"
-               BlueprintName = "HappyChat"
-               ReferencedContainer = "container:HappyChat.xcodeproj">
+               BuildableName = "Chatbrities.app"
+               BlueprintName = "Chatbrities"
+               ReferencedContainer = "container:Chatbrities.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "387E935D1D08888D0070EEA7"
-               BuildableName = "HappyChatTests.xctest"
-               BlueprintName = "HappyChatTests"
-               ReferencedContainer = "container:HappyChat.xcodeproj">
+               BuildableName = "Chatbrities.xctest"
+               BlueprintName = "ChatbritiesTests"
+               ReferencedContainer = "container:Chatbrities.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "387E935D1D08888D0070EEA7"
-               BuildableName = "HappyChatTests.xctest"
-               BlueprintName = "HappyChatTests"
-               ReferencedContainer = "container:HappyChat.xcodeproj">
+               BuildableName = "Chatbrities.xctest"
+               BlueprintName = "ChatbritiesTests"
+               ReferencedContainer = "container:Chatbrities.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "387E93441D08888D0070EEA7"
-            BuildableName = "HappyChat.app"
-            BlueprintName = "HappyChat"
-            ReferencedContainer = "container:HappyChat.xcodeproj">
+            BuildableName = "Chatbrities.app"
+            BlueprintName = "Chatbrities"
+            ReferencedContainer = "container:Chatbrities.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "387E93441D08888D0070EEA7"
-            BuildableName = "HappyChat.app"
-            BlueprintName = "HappyChat"
-            ReferencedContainer = "container:HappyChat.xcodeproj">
+            BuildableName = "Chatbrities.app"
+            BlueprintName = "Chatbrities"
+            ReferencedContainer = "container:Chatbrities.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -99,9 +99,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "387E93441D08888D0070EEA7"
-            BuildableName = "HappyChat.app"
-            BlueprintName = "HappyChat"
-            ReferencedContainer = "container:HappyChat.xcodeproj">
+            BuildableName = "Chatbrities.app"
+            BlueprintName = "Chatbrities"
+            ReferencedContainer = "container:Chatbrities.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

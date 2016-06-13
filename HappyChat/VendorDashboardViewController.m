@@ -26,7 +26,7 @@
     self.vendorDetailBar.layer.shadowPath = shadowPath.CGPath;
     
     self.vendorName.text = [NSString stringWithFormat:@"%@ %@", [[Session loginData] objectForKey:KEY_USER_FIRSTNAME], [[Session loginData] objectForKey:KEY_USER_LASTNAME]];
-    self.vendorPoint.text = [NSString stringWithFormat:@"%@ pts/min", [[Session loginData] objectForKey:KEY_USER_COST]];
+    self.vendorCost.text = [NSString stringWithFormat:@"%@ pts/min", [[Session loginData] objectForKey:KEY_USER_COST]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

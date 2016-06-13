@@ -10,5 +10,7 @@
 
 @interface VendorTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *vendorPhoto;
+@property (weak, nonatomic) IBOutlet UILabel *vendorName;
+@property (weak, nonatomic) IBOutlet UILabel *vendorCost;
 
 @end

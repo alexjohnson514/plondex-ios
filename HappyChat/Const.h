@@ -14,6 +14,7 @@
 #define SERVER_URL                      @"https://plondex.com/api"
 
 #define API_LOGIN   @"login"
+#define API_GET_VENDORS @"get_vendors"
 
 #define KEY_SUCCESS     @"success"
 #define KEY_MESSAGE     @"message"

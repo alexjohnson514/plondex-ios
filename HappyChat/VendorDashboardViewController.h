@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *waitingTable;
 @property (weak, nonatomic) IBOutlet UITableView *chatTable;
 @property (weak, nonatomic) IBOutlet UILabel *vendorName;
-@property (weak, nonatomic) IBOutlet UILabel *vendorPoint;
+@property (weak, nonatomic) IBOutlet UILabel *vendorCost;
 @property (weak, nonatomic) IBOutlet UIImageView *vendorImage;
 @property (strong, nonatomic) NSMutableArray *waitingList;
 

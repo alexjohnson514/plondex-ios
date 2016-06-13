@@ -38,7 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		387E93451D08888D0070EEA7 /* HappyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		387E93451D08888D0070EEA7 /* Chatbrities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatbrities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		387E93491D08888D0070EEA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		387E934A1D08888D0070EEA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		387E934C1D08888D0070EEA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		387E93531D08888D0070EEA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		387E93551D08888D0070EEA7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		387E93581D08888D0070EEA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		387E935E1D08888D0070EEA7 /* HappyChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		387E935E1D08888D0070EEA7 /* Chatbrities.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Chatbrities.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		387E93631D08888D0070EEA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		387E93641D08888D0070EEA7 /* HappyChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappyChatTests.m; sourceTree = "<group>"; };
 		387E936E1D08962E0070EEA7 /* VendorSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorSelectViewController.h; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		387E933C1D08888D0070EEA7 = {
 			isa = PBXGroup;
 			children = (
-				387E93471D08888D0070EEA7 /* HappyChat */,
+				387E93471D08888D0070EEA7 /* Chatbrities */,
 				387E93611D08888D0070EEA7 /* HappyChatTests */,
 				387E93461D08888D0070EEA7 /* Products */,
 			);
@@ -105,13 +105,13 @@
 		387E93461D08888D0070EEA7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				387E93451D08888D0070EEA7 /* HappyChat.app */,
-				387E935E1D08888D0070EEA7 /* HappyChatTests.xctest */,
+				387E93451D08888D0070EEA7 /* Chatbrities.app */,
+				387E935E1D08888D0070EEA7 /* Chatbrities.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		387E93471D08888D0070EEA7 /* HappyChat */ = {
+		387E93471D08888D0070EEA7 /* Chatbrities */ = {
 			isa = PBXGroup;
 			children = (
 				38C80B171D0E3C3400E0B01F /* UITextField+LeftPadding.m */,
@@ -145,6 +145,7 @@
 				38C80B231D0EC31100E0B01F /* SideMenuVendorViewController.h */,
 				38C80B241D0EC31100E0B01F /* SideMenuVendorViewController.m */,
 			);
+			name = Chatbrities;
 			path = HappyChat;
 			sourceTree = "<group>";
 		};
@@ -177,9 +178,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		387E93441D08888D0070EEA7 /* HappyChat */ = {
+		387E93441D08888D0070EEA7 /* Chatbrities */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 387E93681D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "HappyChat" */;
+			buildConfigurationList = 387E93681D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "Chatbrities" */;
 			buildPhases = (
 				387E93411D08888D0070EEA7 /* Sources */,
 				387E93421D08888D0070EEA7 /* Frameworks */,
@@ -189,14 +190,14 @@
 			);
 			dependencies = (
 			);
-			name = HappyChat;
+			name = Chatbrities;
 			productName = HappyChat;
-			productReference = 387E93451D08888D0070EEA7 /* HappyChat.app */;
+			productReference = 387E93451D08888D0070EEA7 /* Chatbrities.app */;
 			productType = "com.apple.product-type.application";
 		};
-		387E935D1D08888D0070EEA7 /* HappyChatTests */ = {
+		387E935D1D08888D0070EEA7 /* ChatbritiesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 387E936B1D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "HappyChatTests" */;
+			buildConfigurationList = 387E936B1D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "ChatbritiesTests" */;
 			buildPhases = (
 				387E935A1D08888D0070EEA7 /* Sources */,
 				387E935B1D08888D0070EEA7 /* Frameworks */,
@@ -207,9 +208,9 @@
 			dependencies = (
 				387E93601D08888D0070EEA7 /* PBXTargetDependency */,
 			);
-			name = HappyChatTests;
+			name = ChatbritiesTests;
 			productName = HappyChatTests;
-			productReference = 387E935E1D08888D0070EEA7 /* HappyChatTests.xctest */;
+			productReference = 387E935E1D08888D0070EEA7 /* Chatbrities.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -231,7 +232,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 387E93401D08888D0070EEA7 /* Build configuration list for PBXProject "HappyChat" */;
+			buildConfigurationList = 387E93401D08888D0070EEA7 /* Build configuration list for PBXProject "Chatbrities" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -244,8 +245,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				387E93441D08888D0070EEA7 /* HappyChat */,
-				387E935D1D08888D0070EEA7 /* HappyChatTests */,
+				387E93441D08888D0070EEA7 /* Chatbrities */,
+				387E935D1D08888D0070EEA7 /* ChatbritiesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -305,7 +306,7 @@
 /* Begin PBXTargetDependency section */
 		387E93601D08888D0070EEA7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 387E93441D08888D0070EEA7 /* HappyChat */;
+			target = 387E93441D08888D0070EEA7 /* Chatbrities */;
 			targetProxy = 387E935F1D08888D0070EEA7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -421,7 +422,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tuan Nguyen (8C28669M4Q)";
 				INFOPLIST_FILE = HappyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Chatbrities;
 			};
 			name = Debug;
 		};
@@ -432,7 +433,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tuan Nguyen (8C28669M4Q)";
 				INFOPLIST_FILE = HappyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Chatbrities;
 			};
 			name = Release;
 		};
@@ -450,8 +451,8 @@
 				);
 				INFOPLIST_FILE = HappyChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HappyChat.app/HappyChat";
+				PRODUCT_NAME = Chatbrities;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chatbrities.app/Chatbrities";
 			};
 			name = Debug;
 		};
@@ -465,15 +466,15 @@
 				);
 				INFOPLIST_FILE = HappyChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HappyChat.app/HappyChat";
+				PRODUCT_NAME = Chatbrities;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chatbrities.app/Chatbrities";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		387E93401D08888D0070EEA7 /* Build configuration list for PBXProject "HappyChat" */ = {
+		387E93401D08888D0070EEA7 /* Build configuration list for PBXProject "Chatbrities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				387E93661D08888D0070EEA7 /* Debug */,
@@ -482,7 +483,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		387E93681D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "HappyChat" */ = {
+		387E93681D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "Chatbrities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				387E93691D08888D0070EEA7 /* Debug */,
@@ -491,7 +492,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		387E936B1D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "HappyChatTests" */ = {
+		387E936B1D08888D0070EEA7 /* Build configuration list for PBXNativeTarget "ChatbritiesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				387E936C1D08888D0070EEA7 /* Debug */,
