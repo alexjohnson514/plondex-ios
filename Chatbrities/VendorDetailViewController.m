@@ -25,9 +25,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *vendorCost;
 @property (weak, nonatomic) IBOutlet UIButton *talkButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (strong, nonatomic) SKYLINKConnection* skylinkConnection;
 
-@property (strong, nonatomic) UIView *peerVideoView;
-@property (strong, nonatomic) UIView *userVideoView;
+@property (strong, nonatomic) NSString *roomName;
 
 @end
 
@@ -54,9 +54,13 @@
     indicator.hidesWhenStopped = YES;
     
     [self.view addSubview:indicator];
-    [indicator startAnimating];
+}
 
-    
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [indicator startAnimating];
+    self.vendorName.text = [NSString stringWithFormat:@"%@ %@", [[Session selectedVendor] objectForKey:KEY_USER_FIRSTNAME], [[Session selectedVendor] objectForKey:KEY_USER_LASTNAME]];
+    self.vendorCost.text = [NSString stringWithFormat:@"%@ pts/min", [[Session selectedVendor] objectForKey:KEY_USER_COST]];
     self.messages = [[NSMutableArray alloc] initWithArray:@[]];
     self.peers = [[NSMutableDictionary alloc] initWithDictionary:@{}];
     self.roomName = [NSString stringWithFormat:@"room_%@", [[Session selectedVendor] objectForKey:KEY_USER_ID]];
@@ -65,25 +69,25 @@
     NSString* uid = [[Session loginData] objectForKey:KEY_USER_ID];
     // Creating configuration
     SKYLINKConnectionConfig *config = [SKYLINKConnectionConfig new];
-    config.video = YES;
-    config.audio = YES;
+    config.video = NO;
+    config.audio = NO;
     config.fileTransfer = NO;
     config.dataChannel = YES; // for data chanel messages
     
     // Creating SKYLINKConnection
-    gApp.skylinkConnection = [[SKYLINKConnection alloc] initWithConfig:config appKey:CONSTANT_SKYLINK_APP_KEY];
-    gApp.skylinkConnection.lifeCycleDelegate = self;
-    gApp.skylinkConnection.messagesDelegate = self;
-    gApp.skylinkConnection.mediaDelegate = self;
-    gApp.skylinkConnection.remotePeerDelegate = self;
+    
+    self.skylinkConnection = [[SKYLINKConnection alloc] initWithConfig:config appKey:CONSTANT_SKYLINK_APP_KEY];
+    self.skylinkConnection.lifeCycleDelegate = self;
+    self.skylinkConnection.messagesDelegate = self;
+    self.skylinkConnection.remotePeerDelegate = self;
     // Connecting to a room
     [SKYLINKConnection setVerbose:TRUE];
     NSDictionary* userInfo = @{
-                          @"name": name,
-                          @"photo": photo,
-                          @"id": uid
-                          };
-    [gApp.skylinkConnection connectToRoomWithSecret:CONSTANT_SKYLINK_SECRET roomName:self.roomName userInfo:userInfo]; // a nickname could be sent here via userInfo cf the implementation of - (void)connection:(SKYLINKConnection*)connection didJoinPeer:(id)userInfo mediaProperties:(SKYLINKPeerMediaProperties*)pmProperties peerId:(NSString*)peerId
+                               @"name": name,
+                               @"photo": photo,
+                               @"id": uid
+                               };
+    [self.skylinkConnection connectToRoomWithSecret:CONSTANT_SKYLINK_SECRET roomName:self.roomName userInfo:userInfo]; // a nickname could be sent here via userInfo cf the implementation of - (void)connection:(SKYLINKConnection*)connection didJoinPeer:(id)userInfo mediaProperties:(SKYLINKPeerMediaProperties*)pmProperties peerId:(NSString*)peerId
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,8 +104,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"chatCell";
     ChatTableViewCell *cell = (ChatTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSDictionary* peer = [self.peers objectForKey:[self.messages[indexPath.row] objectForKey:@"peerId"]];
+    cell.name.text = [peer objectForKey:@"name"];
+    if(peer == nil)
+        cell.name.text = @"You";
+    cell.message.text = [self.messages[indexPath.row] objectForKey:@"message"];
     return cell;
 }
+
 #pragma mark - SKYLINKConnectionLifeCycleDelegate
 
 - (void)connection:(SKYLINKConnection*)connection didConnectWithMessage:(NSString*)errorMessage success:(BOOL)isSuccess {
@@ -121,68 +131,29 @@
     [self.navigationController popViewControllerAnimated:NO];
 }
 
-- (void)connection:(SKYLINKConnection*)connection didRenderUserVideo:(UIView*)userVideoView {
-    self.userVideoView = userVideoView;
-}
-
-- (void)connection:(SKYLINKConnection*)connection didRenderPeerVideo:(UIView*)peerVideoView peerId:(NSString*)peerId {
-    self.peerVideoView = peerVideoView;
-}
-
-#pragma mark - SKYLINKConnectionMediaDelegate
-- (void)connection:(SKYLINKConnection*)connection didChangeVideoSize:(CGSize)videoSize videoView:(UIView*)videoView
-{
-}
-
-- (void)connection:(SKYLINKConnection *)connection didToggleAudio:(BOOL)isMuted peerId:(NSString *)peerId {
-}
-
-- (void)connection:(SKYLINKConnection *)connection didToggleVideo:(BOOL)isMuted peerId:(NSString *)peerId {
-}
-
-
 #pragma mark - SKYLINKConnectionMessagesDelegate
 
-- (void)connection:(SKYLINKConnection*)connection didReceiveCustomMessage:(id)message public:(BOOL)isPublic peerId:(NSString*)peerId {
-    if([[message substringToIndex:7] isEqualToString:@"[accept]"]) {
-        [self performSegueWithIdentifier:@"moveToVideo" sender:self];
-    } else {
-        [self.messages insertObject:@{@"message" : message, // could also be custom structure like message[@"message"]
-                                  @"isPublic" : [NSNumber numberWithBool:isPublic],
-                                  @"peerId" : peerId,
-                                  @"type" : @"signaling server"
-                                  }
-                        atIndex:0];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-    }
-}
-
 - (void)connection:(SKYLINKConnection*)connection didReceiveDCMessage:(id)message public:(BOOL)isPublic peerId:(NSString*)peerId {
-    [self.messages insertObject:@{@"message" : message,
+    if([message length]>7 && [[message substringToIndex:8] isEqualToString:@"[accept]"]) {
+        NSString* videoRoom = [message substringFromIndex:8];
+        gApp.videoRoom = videoRoom;
+        [self.skylinkConnection disconnect:^{
+            [self performSegueWithIdentifier:@"moveToVideo" sender:self];
+        }];
+    } else {
+        [self.messages addObject:@{@"message" : message,
                                   @"isPublic" : [NSNumber numberWithBool:isPublic],
                                   @"peerId" : peerId,
                                   @"type" : @"P2P"
-                                  }
-                        atIndex:0];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade]; // equivalent of [self.tableView reloadData]; + [self.tableView scrollsToTop]; but with an animation
+                                  }];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade]; // equivalent of [self.tableView reloadData]; + [self.tableView scrollsToTop]; but with an animation
+    }
 }
-
-- (void)connection:(SKYLINKConnection*)connection didReceiveBinaryData:(NSData*)data peerId:(NSString*)peerId {
-    id maybeString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self.messages insertObject:@{@"message" : (maybeString && [maybeString isKindOfClass:[NSString class]]) ? ((NSString *)maybeString) : [NSString stringWithFormat:@"Binary data of length %lu", (unsigned long)data.length], // if received by the Android sample app, the length will be printed as message
-                                  @"isPublic" :[NSNumber numberWithBool:NO], // always private if received by iOS sample app
-                                  @"peerId" : peerId,
-                                  @"type" : @"binary data"
-                                  }
-                        atIndex:0];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-}
-
 
 #pragma mark - SKYLINKConnectionRemotePeerDelegate
 
 - (void)connection:(SKYLINKConnection*)connection didJoinPeer:(id)userInfo mediaProperties:(SKYLINKPeerMediaProperties*)pmProperties peerId:(NSString*)peerId {
-    [self.peers addEntriesFromDictionary:@{peerId:peerId}];
+    [self.peers addEntriesFromDictionary:@{peerId:userInfo}];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.talkButton.enabled = YES;
     });
@@ -190,13 +161,17 @@
 
 - (void)connection:(SKYLINKConnection*)connection didReceiveUserInfo:(id)userInfo peerId:(NSString*)peerId {
     [self.peers removeObjectForKey:peerId];
-    [self.peers addEntriesFromDictionary:@{peerId:peerId}];
+    [self.peers addEntriesFromDictionary:@{peerId:userInfo}];
     [self.tableView reloadData]; // will reload the sender label
 }
 
 - (void)connection:(SKYLINKConnection*)connection didLeavePeerWithMessage:(NSString*)errorMessage peerId:(NSString*)peerId {
     NSLog(@"Peer with ID %@ left with message: %@", peerId, errorMessage);
     [self.peers removeObjectForKey:peerId];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.talkButton.enabled = NO;
+    });
+
 }
 
 -(IBAction)processMessage:(id)sender {
@@ -211,28 +186,25 @@
 }
 
 -(IBAction)talkTap:(id)sender {
-    NSDictionary* peer = [self.peers objectForKey:@0];
-    NSString *message = [NSString stringWithFormat:@"[vtr]%@", gApp.skylinkConnection.myPeerId];
-    [self sendMessage:message forPeerId:nil];
+    NSString *message = [NSString stringWithFormat:@"[vtr]%@", 
+self.skylinkConnection.myPeerId];
+    [self.skylinkConnection sendDCMessage:message peerId:nil];
 }
 
 -(void)sendMessage:(NSString *)message forPeerId:(NSString *)peerId { // nil peerId means public message
-    
-    [gApp.skylinkConnection sendCustomMessage:message peerId:peerId];
-    
+    [self.skylinkConnection sendDCMessage:message peerId:peerId];
     self.messageTextField.text = @"";
     [self.messages insertObject:@{@"message" : message,
                                       @"isPublic" :[NSNumber numberWithBool:(!peerId)],
-                                      @"peerId" : gApp.skylinkConnection.myPeerId}
+                                      @"peerId" : self.skylinkConnection.myPeerId}
                             atIndex:0];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
     [self.messageTextField resignFirstResponder];
 }
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([[segue identifier] isEqualToString:@"moveToVideo"]) {
-        [segue.destinationViewController performSelector:@selector(addUserVideoView:) withObject:self.userVideoView];
-        [segue.destinationViewController performSelector:@selector(addPeerVideoView:) withObject:self.peerVideoView];
-    }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField              // called when 'return' key pressed. return NO to ignore.
+{
+    return [textField resignFirstResponder];
 }
+
 
 @end

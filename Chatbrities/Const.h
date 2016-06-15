@@ -33,6 +33,7 @@
 #define KEY_USER_FILENAME      @"u_filename"
 #define KEY_USER_AT      @"u_at"
 #define KEY_USER_FACEBOOK      @"u_facebook"
+#define KEY_CONVO_ID        @"convoId"
 
 #define USERTYPE_USER   @"0"
 #define USERTYPE_VENDOR   @"1"

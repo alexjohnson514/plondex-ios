@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface WaitingTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *photo;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet NSString* peerId;
 
 @end

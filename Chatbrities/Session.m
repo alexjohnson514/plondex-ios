@@ -17,12 +17,17 @@
     [Session setLoginDataWithData:nil];
 }
 + (void) setLoginDataWithData: (NSDictionary*) data {
-    AppDelegate *gApp = [UIApplication sharedApplication].delegate;
-    gApp.loginData = data;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data1= [NSKeyedArchiver archivedDataWithRootObject:data];
+    [defaults setObject:data1 forKey:@"loginData"];
+    [defaults synchronize];
 }
 + (NSDictionary*) loginData {
-    AppDelegate *gApp = [UIApplication sharedApplication].delegate;
-    return gApp.loginData;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [defaults objectForKey:@"loginData"];
+    if(data==nil) return nil;
+    NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    return arr;
 }
 + (void)setSelectedVendor: (NSDictionary*) vendor {
     AppDelegate *gApp = [UIApplication sharedApplication].delegate;

@@ -10,8 +10,7 @@
 #import <SKYLINK/SKYLINK.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) NSDictionary* loginData;
 @property (strong, nonatomic) NSDictionary* selectedVendor;
-@property (strong, nonatomic) SKYLINKConnection* skylinkConnection;
+@property (strong, nonatomic) NSString* videoRoom;
 @end
 

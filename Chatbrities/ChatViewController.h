@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SKYLINK/SKYLINK.h>
 
-@interface ChatViewController : UIViewController
+@interface ChatViewController : UIViewController<SKYLINKConnectionMediaDelegate, SKYLINKConnectionLifeCycleDelegate, SKYLINKConnectionRemotePeerDelegate>
 
 @end

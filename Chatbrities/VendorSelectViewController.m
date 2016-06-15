@@ -18,7 +18,6 @@
 @implementation VendorSelectViewController
 @synthesize indicator;
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,6 +29,11 @@
     
     [self.view addSubview:indicator];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255.0/255 green:132.0/255 blue:0.0 alpha:1.0];
+    
+    if([Session isLoggedIn] && [[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_VENDOR])
+    {
+        [self performSegueWithIdentifier:@"loginVendorSegue" sender:self];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

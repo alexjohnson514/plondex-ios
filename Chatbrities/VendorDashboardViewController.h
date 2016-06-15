@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SKYLINK/SKYLINK.h>
 
-@interface VendorDashboardViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface VendorDashboardViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, SKYLINKConnectionLifeCycleDelegate, SKYLINKConnectionMessagesDelegate, SKYLINKConnectionRemotePeerDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vendorDetailBar;
 @property (weak, nonatomic) IBOutlet UITableView *waitingTable;
 @property (weak, nonatomic) IBOutlet UITableView *chatTable;
@@ -16,6 +17,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *vendorCost;
 @property (weak, nonatomic) IBOutlet UIImageView *vendorImage;
 @property (strong, nonatomic) NSMutableArray *waitingList;
-@property (strong, nonatomic) NSString *roomName;
 
 @end

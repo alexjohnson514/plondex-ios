@@ -10,8 +10,7 @@
 #import <SKYLINK/SKYLINK.h>
 
 
-@interface VendorDetailViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, SKYLINKConnectionLifeCycleDelegate, SKYLINKConnectionMessagesDelegate, SKYLINKConnectionRemotePeerDelegate, SKYLINKConnectionMediaDelegate>
+@interface VendorDetailViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, SKYLINKConnectionLifeCycleDelegate, SKYLINKConnectionMessagesDelegate, SKYLINKConnectionRemotePeerDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vendorDetailBar;
-@property (strong, nonatomic) NSString *roomName;
 
 @end
