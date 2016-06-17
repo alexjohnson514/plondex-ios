@@ -1,6 +1,6 @@
 //
 //  SideMenuLoginViewController.m
-//  HappyChat
+//  Chatbrities
 //
 //  Created by Alex Johnson on 11/06/2016.
 //  Copyright © 2016 NikolaiTomov. All rights reserved.
@@ -69,21 +69,25 @@
     [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [indicator stopAnimating];
         if (connectionError) {
+            [[[UIAlertView alloc] initWithTitle:@"Login failed" message:@"Can't connect to server." delegate:nil cancelButtonTitle:nil otherButtonTitles:nil] show];
             NSLog(@"Nikolai : Login Failed.");
         }
         else{
             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if ([jsonObject[KEY_SUCCESS] intValue] == 1) {
-                NSLog(@"Nikolai : Login Failed, %@",  jsonObject[KEY_MESSAGE]);
+            if ([jsonObject[KEY_SUCCESS] intValue] != 1) {
+                [[[UIAlertView alloc] initWithTitle:@"Login failed" message:jsonObject[KEY_MESSAGE] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }
             else{
                 NSLog(@"Nikolai : Login Successful.");
                 
                 UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
+                [parentController popToRootViewControllerAnimated:NO];
                 [self dismissViewControllerAnimated:NO completion:nil];
                 [Session setLoginDataWithData:jsonObject[KEY_DATA]];
                 if([jsonObject[KEY_DATA][KEY_USER_GROUP] isEqualToString: USERTYPE_VENDOR])
                     [parentController.topViewController performSegueWithIdentifier:@"loginVendorSegue" sender:self.presentingViewController];
+                else
+                    [parentController.topViewController performSelectorInBackground:@selector(loadToolbarImage) withObject:nil];
 
             }
         }
@@ -91,19 +95,23 @@
 }
 - (IBAction)onSignUpAsUser:(id)sender {
     UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
+    [parentController popToRootViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:NO completion:nil];
     [parentController.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.presentingViewController];
 }
 - (IBAction)onSignUpAsVendor:(id)sender {
+    UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
+    [parentController popToRootViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [parentController.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.presentingViewController];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(BOOL)shouldAutorotate
+{
+    return NO;
 }
-*/
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
 @end

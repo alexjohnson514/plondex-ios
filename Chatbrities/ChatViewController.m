@@ -1,6 +1,6 @@
 //
 //  ChatViewController.m
-//  HappyChat
+//  Chatbrities
 //
 //  Created by Alex Johnson on 12/06/2016.
 //  Copyright © 2016 NikolaiTomov. All rights reserved.
@@ -14,6 +14,8 @@
 @property (strong, nonatomic) AppDelegate *gApp;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) SKYLINKConnection *skylinkConnection;
+@property (strong, nonatomic) UIView * userVideoView;
+@property (strong, nonatomic) UIView * peerVideoView;
 
 @end
 
@@ -61,13 +63,42 @@
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
 }
-
+- (CGSize)calcFitSize:(CGSize)size toFit:(CGSize) sizefit {
+    float ratioX = sizefit.width / size.width;
+    float ratioY = sizefit.height / size.height;
+    float ew, eh;
+    if(ratioX<ratioY) {
+        ew = sizefit.width;
+        eh = size.height * ratioX;
+    } else {
+        eh = sizefit.height;
+        ew = size.width * ratioY;
+    }
+    return CGSizeMake(ew, eh);
+}
+- (void)viewDidLayoutSubviews
+{
+    if(self.userVideoView)
+    {
+        CGSize size = [self calcFitSize:self.userVideoView.frame.size toFit:CGSizeMake(160, 160)];
+        CGRect rt = CGRectMake(self.view.frame.size.width - size.width - 20, self.view.frame.size.height - size.height - 20, size.width, size.height);
+        self.userVideoView.frame = rt;
+    }
+    if(self.peerVideoView)
+    {
+        CGSize size = [self calcFitSize:self.peerVideoView.frame.size toFit:self.view.frame.size];
+        CGRect rt = CGRectMake((self.view.frame.size.width - size.width)/2, (self.view.frame.size.height - size.height)/2, size.width, size.height);
+        self.peerVideoView.frame = rt;
+    }
+}
 - (void)addUserVideoView:(UIView*)view {
+    self.userVideoView = view;
     [self.view insertSubview:view atIndex:0];
     view.frame = CGRectMake(view.frame.size.width - 140, view.frame.size.height - 180, 120, 160);
 }
 
 - (void)addPeerVideoView:(UIView*)view {
+    self.peerVideoView = view;
     [self.view insertSubview:view atIndex:0];
     view.frame = self.view.frame;
 }
@@ -115,6 +146,19 @@
 #pragma mark - SKYLINKConnectionMediaDelegate
 - (void)connection:(SKYLINKConnection*)connection didChangeVideoSize:(CGSize)videoSize videoView:(UIView*)videoView
 {
+    if(videoView == self.peerVideoView)
+    {
+        CGSize size = [self calcFitSize:videoSize toFit:self.view.frame.size];
+        CGRect rt = CGRectMake((self.view.frame.size.width - size.width)/2, (self.view.frame.size.height - size.height)/2, size.width, size.height);
+        videoView.frame = rt;
+    }
+    if(videoView == self.userVideoView)
+    {
+        CGSize size = [self calcFitSize:videoSize toFit:CGSizeMake(160, 160)];
+        CGRect rt = CGRectMake(self.view.frame.size.width - size.width - 20, self.view.frame.size.height - size.height - 20, size.width, size.height);
+        videoView.frame = rt;
+    }
+
 }
 
 - (void)connection:(SKYLINKConnection *)connection didToggleAudio:(BOOL)isMuted peerId:(NSString *)peerId {}

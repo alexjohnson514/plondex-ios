@@ -1,6 +1,6 @@
 //
 //  VendorSelectViewController.m
-//  HappyChat
+//  Chatbrities
 //
 //  Created by Alex Johnson on 8/06/2016.
 //  Copyright (c) 2016 NikolaiTomov. All rights reserved.
@@ -12,11 +12,12 @@
 #import "Const.h"
 
 @interface VendorSelectViewController ()
-
+@property (strong, nonatomic) UIImageView* profileImageView;
 @end
 
 @implementation VendorSelectViewController
 @synthesize indicator;
+@synthesize profileImageView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,10 +35,18 @@
     {
         [self performSegueWithIdentifier:@"loginVendorSegue" sender:self];
     }
+    
+    self.vendorPhotoCache = [[NSMutableDictionary alloc] init];
+    [self performSelectorInBackground:@selector(loadToolbarImage) withObject:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
     [super viewDidAppear:animated];
+    
+    profileImageView = self.navigationItem.titleView.subviews[0];
+    profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2;
+    
     self.vendorList = [[NSMutableArray alloc] init];
     [indicator startAnimating];
     
@@ -57,7 +66,7 @@
         }
         else{
             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if ([jsonObject[KEY_SUCCESS] intValue] == 1) {
+            if ([jsonObject[KEY_SUCCESS] intValue] != 1) {
                 NSLog(@"Nikolai : Get Vendor List Failed, %@",  jsonObject[KEY_MESSAGE]);
             }
             else{
@@ -67,6 +76,7 @@
             }
         }
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,18 +99,74 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"vendorCell";
     VendorTableViewCell *cell = (VendorTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    cell.vendorId = [self.vendorList[indexPath.row] objectForKey:KEY_USER_ID];
+    cell.vendorPhoto.image = [UIImage imageNamed:@"vendor_photo"];
+    [self performSelectorInBackground:@selector(loadImage:) withObject:cell];
     cell.vendorName.text = [NSString stringWithFormat:@"%@ %@", [self.vendorList[indexPath.row] objectForKey:KEY_USER_FIRSTNAME], [self.vendorList[indexPath.row] objectForKey:KEY_USER_LASTNAME]];
-    cell.vendorCost.text = [NSString stringWithFormat:@"%@ pts/min", [self.vendorList[indexPath.row] objectForKey:KEY_USER_COST]];
+    NSString* cost = [self.vendorList[indexPath.row] objectForKey:KEY_USER_COST];
+    if (cost == nil || cost == (id)[NSNull null]) cost = @"0";
+    cell.vendorCost.text = [NSString stringWithFormat:@"%@ pts/min", cost];
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *loginVendorSegue = @"loginUserSegue";
-    if(![Session isLoggedIn])
-        [self performSegueWithIdentifier:@"showLoginSideMenuSegue" sender:self];
-    else
+- (void)loadToolbarImage {
+    if(![Session isLoggedIn]) return;
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [searchPaths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/profile", documentPath];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {
-        [Session setSelectedVendor:self.vendorList[indexPath.row]];
-        [self performSegueWithIdentifier:loginVendorSegue sender:self];
+        UIImage* image = [[UIImage alloc] initWithContentsOfFile:filePath];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            profileImageView.image = image;
+        });
+    } else {
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/50/50/1", SERVER_URL, API_PHOTO, [[Session loginData] objectForKey:KEY_USER_ID]]]];
+        UIImage* image = [[UIImage alloc] initWithData:data];
+        
+        if(image==nil) {
+            image = [UIImage imageNamed:@"vendor_photo"];
+            CGDataProviderRef provider = CGImageGetDataProvider(image.CGImage);
+            data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+        }
+        [data writeToFile:filePath atomically:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            profileImageView.image = image;
+        });
     }
 }
+- (void)loadImage:(VendorTableViewCell*)cell {
+    NSString* vendorId = cell.vendorId;
+    UIImageView* vendorPhoto = cell.vendorPhoto;
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [searchPaths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentPath, vendorId];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/%d/%d/1", SERVER_URL, API_PHOTO, vendorId, (int)vendorPhoto.frame.size.width, (int)vendorPhoto.frame.size.height]]];
+        UIImage* image = [[UIImage alloc] initWithData:data];
+        
+        if(image==nil) {
+            image = [UIImage imageNamed:@"vendor_photo"];
+            data = UIImagePNGRepresentation(image);
+        }
+        [data writeToFile:filePath atomically:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([vendorId isEqualToString:cell.vendorId])
+                vendorPhoto.image = image;
+        });
+    } else {
+        UIImage* image;
+        image = [[UIImage alloc] initWithContentsOfFile:filePath];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            vendorPhoto.image = image;
+        });
+    }
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [Session setSelectedVendor:self.vendorList[indexPath.row]];
+    [self performSegueWithIdentifier:@"loginUserSegue" sender:self];
+}
+
 @end

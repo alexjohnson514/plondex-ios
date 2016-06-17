@@ -1,6 +1,6 @@
 //
 //  VendorDetailViewController.m
-//  HappyChat
+//  Chatbrities
 //
 //  Created by Alex Johnson on 8/06/2016.
 //  Copyright (c) 2016 NikolaiTomov. All rights reserved.
@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *vendorPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *vendorName;
 @property (weak, nonatomic) IBOutlet UILabel *vendorCost;
 @property (weak, nonatomic) IBOutlet UIButton *talkButton;
@@ -28,12 +29,15 @@
 @property (strong, nonatomic) SKYLINKConnection* skylinkConnection;
 
 @property (strong, nonatomic) NSString *roomName;
+@property (strong, nonatomic) UIImageView* profileImageView;
 
 @end
 
 @implementation VendorDetailViewController
 @synthesize indicator;
 @synthesize gApp;
+@synthesize profileImageView;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +45,10 @@
 
     // Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
-    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.vendorDetailBar.bounds];
+    
+    CGRect bounds = CGRectMake(self.view.bounds.origin.x, self.vendorDetailBar.bounds.origin.y, self.view.bounds.size.width, self.vendorDetailBar.bounds.size.height);
+
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:bounds];
     self.vendorDetailBar.layer.masksToBounds = NO;
     self.vendorDetailBar.layer.shadowColor = [UIColor blackColor].CGColor;
     self.vendorDetailBar.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
@@ -58,15 +65,27 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    profileImageView = self.navigationItem.titleView.subviews[0];
+    profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2;
+    
+    [self loadToolbarImage];
+    [self loadVendorImage];
     [indicator startAnimating];
     self.vendorName.text = [NSString stringWithFormat:@"%@ %@", [[Session selectedVendor] objectForKey:KEY_USER_FIRSTNAME], [[Session selectedVendor] objectForKey:KEY_USER_LASTNAME]];
-    self.vendorCost.text = [NSString stringWithFormat:@"%@ pts/min", [[Session selectedVendor] objectForKey:KEY_USER_COST]];
+    NSString* cost = [[Session selectedVendor] objectForKey:KEY_USER_COST];
+    if (cost == nil || cost == (id)[NSNull null]) cost = @"0";
+    self.vendorCost.text = [NSString stringWithFormat:@"%@ pts/min", cost];
     self.messages = [[NSMutableArray alloc] initWithArray:@[]];
     self.peers = [[NSMutableDictionary alloc] initWithDictionary:@{}];
     self.roomName = [NSString stringWithFormat:@"room_%@", [[Session selectedVendor] objectForKey:KEY_USER_ID]];
-    NSString* name = [NSString stringWithFormat:@"%@ %@", [[Session loginData] objectForKey:KEY_USER_FIRSTNAME], [[Session loginData] objectForKey:KEY_USER_LASTNAME]];
-    NSString* photo = [NSString stringWithFormat:@"https://plondex.com/photo/user/%@/50/50/1", [[Session loginData] objectForKey:KEY_USER_ID]];
-    NSString* uid = [[Session loginData] objectForKey:KEY_USER_ID];
+    NSString *name = @"", *photo = @"", *uid = @"";
+    if([Session isLoggedIn])
+    {
+        name = [NSString stringWithFormat:@"%@ %@", [[Session loginData] objectForKey:KEY_USER_FIRSTNAME], [[Session loginData] objectForKey:KEY_USER_LASTNAME]];
+        photo = [NSString stringWithFormat:@"%@%@/%@/50/50/1", SERVER_URL, API_PHOTO, [[Session loginData] objectForKey:KEY_USER_ID]];
+        uid = [[Session loginData] objectForKey:KEY_USER_ID];
+    }
     // Creating configuration
     SKYLINKConnectionConfig *config = [SKYLINKConnectionConfig new];
     config.video = NO;
@@ -115,20 +134,19 @@
 #pragma mark - SKYLINKConnectionLifeCycleDelegate
 
 - (void)connection:(SKYLINKConnection*)connection didConnectWithMessage:(NSString*)errorMessage success:(BOOL)isSuccess {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.indicator stopAnimating];
+    });
     if (isSuccess) {
         NSLog(@"Inside %s", __FUNCTION__);
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Connection failed" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         [self.navigationController popViewControllerAnimated:YES];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.indicator stopAnimating];
-    });
 }
 
 - (void)connection:(SKYLINKConnection*)connection didDisconnectWithMessage:(NSString*)errorMessage {
     [[[UIAlertView alloc] initWithTitle:@"Disconnected" message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark - SKYLINKConnectionMessagesDelegate
@@ -205,6 +223,60 @@ self.skylinkConnection.myPeerId];
 {
     return [textField resignFirstResponder];
 }
+- (void)loadToolbarImage {
+    if(![Session isLoggedIn]) return;
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [searchPaths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/profile", documentPath];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        UIImage* image = [[UIImage alloc] initWithContentsOfFile:filePath];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            profileImageView.image = image;
+        });
+    } else {
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/50/50/1", SERVER_URL, API_PHOTO, [[Session loginData] objectForKey:KEY_USER_ID]]]];
+        UIImage* image = [[UIImage alloc] initWithData:data];
+        
+        if(image==nil) {
+            image = [UIImage imageNamed:@"vendor_photo"];
+            data = UIImagePNGRepresentation(image);
+        }
+        [data writeToFile:filePath atomically:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            profileImageView.image = image;
+        });
+    }
+}
 
-
+- (void)loadVendorImage {
+    NSString* vendorId = [[Session selectedVendor] objectForKey:KEY_USER_ID];
+    UIImageView* vendorPhoto = self.vendorPhoto;
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [searchPaths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentPath, vendorId];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/%d/%d/1", SERVER_URL, API_PHOTO, vendorId, (int)vendorPhoto.frame.size.width, (int)vendorPhoto.frame.size.height]]];
+        UIImage* image = [[UIImage alloc] initWithData:data];
+        
+        if(image==nil) {
+            image = [UIImage imageNamed:@"vendor_photo"];
+            CGDataProviderRef provider = CGImageGetDataProvider(image.CGImage);
+            data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+        }
+        [data writeToFile:filePath atomically:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            vendorPhoto.image = image;
+        });
+    } else {
+        UIImage* image;
+        image = [[UIImage alloc] initWithContentsOfFile:filePath];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            vendorPhoto.image = image;
+        });
+    }
+}
 @end

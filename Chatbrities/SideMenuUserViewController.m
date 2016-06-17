@@ -61,4 +61,11 @@
     [Session logout];
 }
 
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
 @end

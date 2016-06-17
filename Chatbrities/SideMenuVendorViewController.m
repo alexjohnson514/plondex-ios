@@ -1,6 +1,6 @@
 //
 //  SideMenuVendorViewController.m
-//  HappyChat
+//  Chatbrities
 //
 //  Created by Alex Johnson on 13/06/2016.
 //  Copyright © 2016 NikolaiTomov. All rights reserved.
@@ -54,5 +54,12 @@
     [parentController popViewControllerAnimated:NO];
     [Session logout];
 }
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
 @end

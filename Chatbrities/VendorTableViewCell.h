@@ -1,6 +1,6 @@
 //
 //  VendorTableViewCell.h
-//  HappyChat
+//  Chatbrities
 //
 //  Created by Alex Johnson on 8/06/2016.
 //  Copyright (c) 2016 NikolaiTomov. All rights reserved.
@@ -10,7 +10,8 @@
 
 @interface VendorTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *vendorPhoto;
+@property (strong, nonatomic) NSString *vendorId;
 @property (weak, nonatomic) IBOutlet UILabel *vendorName;
 @property (weak, nonatomic) IBOutlet UILabel *vendorCost;
-
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 @end

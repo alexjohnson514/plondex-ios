@@ -1,6 +1,6 @@
 //
 //  Const.h
-//  HappyChat
+//  Chatbrities
 //
 //  Created by Alex Johnson on 12/06/2016.
 //  Copyright © 2016 NikolaiTomov. All rights reserved.
@@ -11,12 +11,15 @@
 #define CONSTANT_SKYLINK_APP_KEY        @"a48a4c94-516e-4c95-8b64-898dc6b76fef"
 #define CONSTANT_SKYLINK_SECRET         @"41nm2xuetdx9l"
 #define AUTH_KEYGEN                     @"a2FkZmphbHNkZmphc2tsIG"
-#define SERVER_URL                      @"https://plondex.com/api"
+#define SERVER_URL                      @"https://plondex.com"
+#define DEFAULT_IMAGE_URL               @"/img/default_profile_photo.png"
 
-#define API_LOGIN   @"login"
-#define API_GET_VENDORS @"get_vendors"
+#define API_LOGIN   @"/api/login"
+#define API_GET_VENDORS @"/api/get_vendors"
+#define API_PHOTO   @"/photo/user"
+#define API_CREATE_CONVO    @"/Convo/createConvo"
 
-#define KEY_SUCCESS     @"success"
+#define KEY_SUCCESS     @"status"
 #define KEY_MESSAGE     @"message"
 #define KEY_DATA     @"data"
 #define KEY_USER_GROUP     @"u_group_id"
