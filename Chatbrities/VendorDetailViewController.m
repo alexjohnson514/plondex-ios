@@ -13,6 +13,10 @@
 #import "Session.h"
 
 @interface VendorDetailViewController ()
+{
+    CGSize keyboardSize;
+}
+
 
 // Properties
 @property (strong, nonatomic) AppDelegate *gApp;
@@ -26,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *vendorCost;
 @property (weak, nonatomic) IBOutlet UIButton *talkButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton1;
 @property (strong, nonatomic) SKYLINKConnection* skylinkConnection;
 
 @property (strong, nonatomic) NSString *roomName;
@@ -61,6 +67,9 @@
     indicator.hidesWhenStopped = YES;
     
     [self.view addSubview:indicator];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -85,6 +94,10 @@
         name = [NSString stringWithFormat:@"%@ %@", [[Session loginData] objectForKey:KEY_USER_FIRSTNAME], [[Session loginData] objectForKey:KEY_USER_LASTNAME]];
         photo = [NSString stringWithFormat:@"%@%@/%@/50/50/1", SERVER_URL, API_PHOTO, [[Session loginData] objectForKey:KEY_USER_ID]];
         uid = [[Session loginData] objectForKey:KEY_USER_ID];
+    } else {
+        self.talkButton.hidden = YES;
+        self.signUpButton.hidden = NO;
+        self.signUpButton1.hidden = NO;
     }
     // Creating configuration
     SKYLINKConnectionConfig *config = [SKYLINKConnectionConfig new];
@@ -113,6 +126,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.messages.count;
 }
@@ -163,8 +186,10 @@
                                   @"isPublic" : [NSNumber numberWithBool:isPublic],
                                   @"peerId" : peerId,
                                   @"type" : @"P2P"
-                                  }];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade]; // equivalent of [self.tableView reloadData]; + [self.tableView scrollsToTop]; but with an animation
+                                   }];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
     }
 }
 
@@ -212,16 +237,16 @@ self.skylinkConnection.myPeerId];
 -(void)sendMessage:(NSString *)message forPeerId:(NSString *)peerId { // nil peerId means public message
     [self.skylinkConnection sendDCMessage:message peerId:peerId];
     self.messageTextField.text = @"";
-    [self.messages insertObject:@{@"message" : message,
+    [self.messages addObject:@{@"message" : message,
                                       @"isPublic" :[NSNumber numberWithBool:(!peerId)],
-                                      @"peerId" : self.skylinkConnection.myPeerId}
-                            atIndex:0];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-    [self.messageTextField resignFirstResponder];
+                                      @"peerId" : self.skylinkConnection.myPeerId}];
+    [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField              // called when 'return' key pressed. return NO to ignore.
 {
-    return [textField resignFirstResponder];
+    [self processMessage:nil];
+    return YES;
 }
 - (void)loadToolbarImage {
     if(![Session isLoggedIn]) return;
@@ -278,5 +303,32 @@ self.skylinkConnection.myPeerId];
             vendorPhoto.image = image;
         });
     }
+}
+- (IBAction)signUpTap:(id)sender {
+    UINavigationController *nav = self.navigationController;
+    [nav popToRootViewControllerAnimated:NO];
+    [nav.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.navigationController.topViewController];
+}
+#pragma mark - NSNotification
+- (void)keyboardWillShow:(NSNotification*)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    keyboardSize = kbSize;
+    
+    float diff = self.view.frame.size.height - (self.messageTextField.frame.origin.y + self.messageTextField.frame.size.height) - keyboardSize.height;
+    
+    CGRect br = self.view.frame;
+    br.origin.y = diff;
+    self.view.frame = br;
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification {
+    CGRect br = self.view.frame;
+    br.origin.y = 0;
+    self.view.frame = br;
+    keyboardSize = CGSizeZero;
+}
+- (IBAction)onTapGesture:(id)sender {
+    [self.messageTextField resignFirstResponder];
 }
 @end

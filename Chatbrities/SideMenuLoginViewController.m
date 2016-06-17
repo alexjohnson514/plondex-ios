@@ -12,7 +12,6 @@
 #import "Session.h"
 
 @interface SideMenuLoginViewController ()
-
 @end
 @implementation SideMenuLoginViewController
 @synthesize indicator;
@@ -69,7 +68,7 @@
     [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [indicator stopAnimating];
         if (connectionError) {
-            [[[UIAlertView alloc] initWithTitle:@"Login failed" message:@"Can't connect to server." delegate:nil cancelButtonTitle:nil otherButtonTitles:nil] show];
+            [[[UIAlertView alloc] initWithTitle:@"Login failed" message:@"Can't connect to server." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             NSLog(@"Nikolai : Login Failed.");
         }
         else{
@@ -105,6 +104,14 @@
     [self dismissViewControllerAnimated:NO completion:nil];
     [parentController.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.presentingViewController];
 }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField              // called when 'return' key pressed. return NO to ignore.
+{
+    if(textField == self.txtEmail)
+        return [self.txtPassword becomeFirstResponder];
+    else
+        [self onLogin:nil];
+    return [textField resignFirstResponder];
+}
 
 -(BOOL)shouldAutorotate
 {
@@ -114,4 +121,6 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
+
+
 @end

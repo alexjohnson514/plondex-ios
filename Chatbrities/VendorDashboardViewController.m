@@ -14,6 +14,10 @@
 #import "AppDelegate.h"
 
 @interface VendorDashboardViewController ()
+{
+    CGSize keyboardSize;
+}
+
 
 // Properties
 @property (strong, nonatomic) AppDelegate *gApp;
@@ -69,6 +73,9 @@
     
     profileImageView = self.navigationItem.titleView.subviews[0];
     profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 }
 
@@ -108,6 +115,15 @@
                                @"id": uid
                                };
     [self.skylinkConnection connectToRoomWithSecret:CONSTANT_SKYLINK_SECRET roomName:self.roomName userInfo:userInfo]; // a nickname could be sent here via userInfo cf the implementation of - (void)connection:(SKYLINKConnection*)connection didJoinPeer:(id)userInfo mediaProperties:(SKYLINKPeerMediaProperties*)pmProperties peerId:(NSString*)peerId
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -171,8 +187,9 @@
                                       @"isPublic" : [NSNumber numberWithBool:isPublic],
                                       @"peerId" : peerId,
                                       @"type" : @"P2P"
-                                      }];
-        [self.chatTable reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade]; // equivalent of [self.tableView reloadData]; + [self.tableView scrollsToTop]; but with an animation
+                                   }];
+        [self.chatTable reloadData];
+        [self.chatTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
@@ -231,6 +248,7 @@
             gApp.videoRoom = jsonObject[KEY_CONVO_ID];
             [self.skylinkConnection disconnect:^{
                 [self performSegueWithIdentifier:@"moveToVideoFromVendor" sender:self];
+                [self.peers removeObjectForKey:peerId];
             }];
         }
     }];
@@ -241,18 +259,18 @@
     [self.skylinkConnection sendDCMessage:message peerId:peerId];
     
     self.messageTextField.text = @"";
-    [self.messages insertObject:@{@"message" : message,
+    [self.messages addObject:@{@"message" : message,
                                   @"isPublic" :[NSNumber numberWithBool:(!peerId)],
-                                  @"peerId" : self.skylinkConnection.myPeerId}
-                        atIndex:0];
-    [self.chatTable reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-    [self.messageTextField resignFirstResponder];
+                               @"peerId" : self.skylinkConnection.myPeerId}];
+    [self.chatTable reloadData];
+    [self.chatTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField              // called when 'return' key pressed. return NO to ignore.
 {
-    return [textField resignFirstResponder];
+    [self processMessage:nil];
+    return YES;
 }
 - (void)loadToolbarImage {
     if(![Session isLoggedIn]) return;
@@ -309,6 +327,29 @@
             vendorPhoto.image = image;
         });
     }
+}
+#pragma mark - NSNotification
+- (void)keyboardWillShow:(NSNotification*)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    keyboardSize = kbSize;
+    
+    float diff = self.view.frame.size.height - (self.messageTextField.frame.origin.y + self.messageTextField.frame.size.height) - keyboardSize.height;
+    
+    CGRect br = self.view.frame;
+    br.origin.y = diff;
+    self.view.frame = br;
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification {
+    CGRect br = self.view.frame;
+    br.origin.y = 0;
+    self.view.frame = br;
+    keyboardSize = CGSizeZero;
+}
+
+- (IBAction)onTapGesture:(id)sender {
+    [self.messageTextField resignFirstResponder];
 }
 
 @end
