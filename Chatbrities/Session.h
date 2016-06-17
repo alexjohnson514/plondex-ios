@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern const NSString *userType;
 @interface Session : NSObject
 + (bool)isLoggedIn;
 + (void)logout;
@@ -15,4 +16,6 @@
 + (NSDictionary*) loginData;
 + (void)setSelectedVendor: (NSDictionary*) vendor;
 + (NSDictionary*)selectedVendor;
++ (void)setSignUpType:(NSString*)type;
++ (NSString*)userType;
 @end

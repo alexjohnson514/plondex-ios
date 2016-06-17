@@ -9,7 +9,14 @@
 #import "Session.h"
 #import "AppDelegate.h"
 
+NSString * userType;
 @implementation Session
++ (void)setSignUpType:(NSString*)type {
+    userType = type;
+}
++ (NSString*)userType {
+    return userType;
+}
 + (bool)isLoggedIn {
     return [self loginData]!=nil;
 }

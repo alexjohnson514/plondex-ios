@@ -331,4 +331,10 @@ self.skylinkConnection.myPeerId];
 - (IBAction)onTapGesture:(id)sender {
     [self.messageTextField resignFirstResponder];
 }
+- (IBAction)onSideMenu:(id)sender {
+    if(![Session isLoggedIn])
+        [self performSegueWithIdentifier:@"showLoginSideMenuSegue" sender:self];
+    else
+        [self performSegueWithIdentifier:@"showUserSideMenuSegue" sender:self];
+}
 @end

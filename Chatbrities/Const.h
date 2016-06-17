@@ -15,9 +15,13 @@
 #define DEFAULT_IMAGE_URL               @"/img/default_profile_photo.png"
 
 #define API_LOGIN   @"/api/login"
+#define API_SIGNUP    @"/api/create_user"
+#define API_GET_USER @"/api/get_user"
 #define API_GET_VENDORS @"/api/get_vendors"
 #define API_PHOTO   @"/photo/user"
 #define API_CREATE_CONVO    @"/Convo/createConvo"
+
+#define REQUEST_COUNT   10
 
 #define KEY_SUCCESS     @"status"
 #define KEY_MESSAGE     @"message"

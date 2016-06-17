@@ -56,7 +56,7 @@
 - (IBAction)onLogin:(id)sender {
     [indicator startAnimating];
     [self.view endEditing:YES];
-    NSString *loginUrl = [[NSString stringWithFormat:@"%@/%@/%@/%@?keygen=%@", SERVER_URL, API_LOGIN, _txtEmail.text,_txtPassword.text, AUTH_KEYGEN] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *loginUrl = [[NSString stringWithFormat:@"%@%@/%@/%@?keygen=%@", SERVER_URL, API_LOGIN, _txtEmail.text,_txtPassword.text, AUTH_KEYGEN] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     loginUrl = [loginUrl stringByReplacingOccurrencesOfString:@"@" withString:@"%40"];
     
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:loginUrl]];
@@ -92,13 +92,17 @@
         }
     }];
 }
+- (IBAction)onFBLogin:(id)sender {
+}
 - (IBAction)onSignUpAsUser:(id)sender {
+    [Session setSignUpType:USERTYPE_USER];
     UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
     [parentController popToRootViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:NO completion:nil];
     [parentController.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.presentingViewController];
 }
 - (IBAction)onSignUpAsVendor:(id)sender {
+    [Session setSignUpType:USERTYPE_VENDOR];
     UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
     [parentController popToRootViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:NO completion:nil];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VendorSelectViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface VendorSelectViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @property (strong, nonatomic) NSMutableArray *vendorList;
 @property (weak, nonatomic) IBOutlet UITableView *vendorListView;

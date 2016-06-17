@@ -8,6 +8,7 @@
 
 #import "SideMenuVendorViewController.h"
 #import "Session.h"
+#import "VendorDashboardViewController.h"
 
 @implementation SideMenuVendorViewController
 
@@ -43,6 +44,13 @@
     }];
 }
 - (IBAction)onMyDashboard:(id)sender {
+    UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
+    [self dismissViewControllerAnimated:NO completion:nil];
+    if([parentController.topViewController isMemberOfClass:[VendorDashboardViewController class]])
+    {
+        //Do nothing
+    } else
+        [parentController popToRootViewControllerAnimated:NO];
 }
 - (IBAction)onMyAccount:(id)sender {
 }

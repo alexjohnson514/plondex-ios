@@ -12,6 +12,9 @@
 #import "Const.h"
 
 @interface VendorSelectViewController ()
+{
+    bool no_more;
+}
 @property (strong, nonatomic) UIImageView* profileImageView;
 @end
 
@@ -21,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    no_more = NO;
     
     // Do any additional setup after loading the view.
     indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -48,34 +52,7 @@
     profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2;
     
     self.vendorList = [[NSMutableArray alloc] init];
-    [indicator startAnimating];
-    
-    NSString *vendorListUrl = [[NSString stringWithFormat:@"%@/%@/%@/%@?keygen=%@", SERVER_URL, API_GET_VENDORS, @0, @0, AUTH_KEYGEN] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    vendorListUrl = [vendorListUrl stringByReplacingOccurrencesOfString:@"@" withString:@"%40"];
-    
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:vendorListUrl]];
-    [urlRequest setTimeoutInterval:30];
-    [urlRequest setHTTPMethod:@"GET"];
-    
-    NSLog(@"Nikolai : %s begin.", __FUNCTION__);
-    
-    [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        [indicator stopAnimating];
-        if (connectionError) {
-            NSLog(@"Nikolai : Get Vendor List Failed.");
-        }
-        else{
-            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if ([jsonObject[KEY_SUCCESS] intValue] != 1) {
-                NSLog(@"Nikolai : Get Vendor List Failed, %@",  jsonObject[KEY_MESSAGE]);
-            }
-            else{
-                NSLog(@"Nikolai : Get Vendor List Successful.");
-                [self.vendorList addObjectsFromArray:jsonObject[KEY_DATA]];
-                [self.vendorListView reloadData];
-            }
-        }
-    }];
+    [self loadVendors];
     
 }
 
@@ -168,5 +145,41 @@
     [Session setSelectedVendor:self.vendorList[indexPath.row]];
     [self performSegueWithIdentifier:@"loginUserSegue" sender:self];
 }
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    if(scrollView.contentOffset.y + scrollView.bounds.size.height> scrollView.contentSize.height && no_more == NO) {
+        [self loadVendors];
+    }
+}
 
+- (void)loadVendors {
+    [indicator startAnimating];
+    
+    NSString *vendorListUrl = [[NSString stringWithFormat:@"%@%@/%d/%d?keygen=%@", SERVER_URL, API_GET_VENDORS, self.vendorList.count, REQUEST_COUNT, AUTH_KEYGEN] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    vendorListUrl = [vendorListUrl stringByReplacingOccurrencesOfString:@"@" withString:@"%40"];
+    
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:vendorListUrl]];
+    [urlRequest setTimeoutInterval:30];
+    [urlRequest setHTTPMethod:@"GET"];
+    
+    NSLog(@"Nikolai : %s begin.", __FUNCTION__);
+    
+    [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        [indicator stopAnimating];
+        if (connectionError) {
+            NSLog(@"Nikolai : Get Vendor List Failed.");
+        }
+        else{
+            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            if ([jsonObject[KEY_SUCCESS] intValue] != 1) {
+                NSLog(@"Nikolai : Get Vendor List Failed, %@",  jsonObject[KEY_MESSAGE]);
+            }
+            else{
+                NSLog(@"Nikolai : Get Vendor List Successful.");
+                [self.vendorList addObjectsFromArray:jsonObject[KEY_DATA]];
+                [self.vendorListView reloadData];
+                if([jsonObject[KEY_DATA] count] < REQUEST_COUNT) no_more = YES;
+            }
+        }
+    }];
+}
 @end
