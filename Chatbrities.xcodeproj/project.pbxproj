@@ -20,14 +20,12 @@
 		3884759E1D11C06F00EACC96 /* CustomUINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3884759D1D11C06F00EACC96 /* CustomUINavigationController.m */; };
 		388475A01D123BBD00EACC96 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3884759F1D123B3000EACC96 /* Roboto-Regular.ttf */; };
 		388475AD1D1262EB00EACC96 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 388475AC1D1262E700EACC96 /* Roboto-Bold.ttf */; };
-		388475B01D149DC100EACC96 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388475AF1D149DC100EACC96 /* SignUpViewController.m */; };
 		38C46B1F1D0EEC75000F5E5F /* SideMenuUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C46B1E1D0EEC75000F5E5F /* SideMenuUserViewController.m */; };
 		38C80B121D0DB61E00E0B01F /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B111D0DB61E00E0B01F /* Session.m */; };
 		38C80B151D0DCD6700E0B01F /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B141D0DCD6700E0B01F /* ChatViewController.m */; };
 		38C80B181D0E3C3400E0B01F /* UITextField+LeftPadding.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B171D0E3C3400E0B01F /* UITextField+LeftPadding.m */; };
 		38C80B1F1D0EB39300E0B01F /* WaitingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B1E1D0EB39300E0B01F /* WaitingTableViewCell.m */; };
 		38C80B221D0EB3E400E0B01F /* VendorDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */; };
-		38C80B251D0EC31100E0B01F /* SideMenuVendorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B241D0EC31100E0B01F /* SideMenuVendorViewController.m */; };
 		38EF76951D0C8D110082C80F /* SideMenuLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -53,8 +51,6 @@
 		3884759D1D11C06F00EACC96 /* CustomUINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUINavigationController.m; sourceTree = "<group>"; };
 		3884759F1D123B3000EACC96 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		388475AC1D1262E700EACC96 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		388475AE1D149DC100EACC96 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
-		388475AF1D149DC100EACC96 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		38C46B1D1D0EEC75000F5E5F /* SideMenuUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuUserViewController.h; sourceTree = "<group>"; };
 		38C46B1E1D0EEC75000F5E5F /* SideMenuUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuUserViewController.m; sourceTree = "<group>"; };
 		38C80B101D0DB61E00E0B01F /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
@@ -67,8 +63,6 @@
 		38C80B1E1D0EB39300E0B01F /* WaitingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitingTableViewCell.m; sourceTree = "<group>"; };
 		38C80B201D0EB3E400E0B01F /* VendorDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorDashboardViewController.h; sourceTree = "<group>"; };
 		38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorDashboardViewController.m; sourceTree = "<group>"; };
-		38C80B231D0EC31100E0B01F /* SideMenuVendorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuVendorViewController.h; sourceTree = "<group>"; };
-		38C80B241D0EC31100E0B01F /* SideMenuVendorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuVendorViewController.m; sourceTree = "<group>"; };
 		38EF76931D0C8D110082C80F /* SideMenuLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuLoginViewController.h; sourceTree = "<group>"; };
 		38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuLoginViewController.m; sourceTree = "<group>"; };
 		7518B312489765F15D2AF276 /* Pods-Chatbrities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatbrities.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chatbrities/Pods-Chatbrities.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,8 +182,6 @@
 				38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */,
 				387E93741D089B8E0070EEA7 /* VendorDetailViewController.h */,
 				387E93751D089B8E0070EEA7 /* VendorDetailViewController.m */,
-				388475AE1D149DC100EACC96 /* SignUpViewController.h */,
-				388475AF1D149DC100EACC96 /* SignUpViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -197,8 +189,6 @@
 		388475A91D12402000EACC96 /* SideMenuController */ = {
 			isa = PBXGroup;
 			children = (
-				38C80B231D0EC31100E0B01F /* SideMenuVendorViewController.h */,
-				38C80B241D0EC31100E0B01F /* SideMenuVendorViewController.m */,
 				38EF76931D0C8D110082C80F /* SideMenuLoginViewController.h */,
 				38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */,
 				38C46B1D1D0EEC75000F5E5F /* SideMenuUserViewController.h */,
@@ -360,9 +350,7 @@
 				38C80B221D0EB3E400E0B01F /* VendorDashboardViewController.m in Sources */,
 				38C80B151D0DCD6700E0B01F /* ChatViewController.m in Sources */,
 				3884759E1D11C06F00EACC96 /* CustomUINavigationController.m in Sources */,
-				388475B01D149DC100EACC96 /* SignUpViewController.m in Sources */,
 				38C80B121D0DB61E00E0B01F /* Session.m in Sources */,
-				38C80B251D0EC31100E0B01F /* SideMenuVendorViewController.m in Sources */,
 				38C80B181D0E3C3400E0B01F /* UITextField+LeftPadding.m in Sources */,
 				387E934E1D08888D0070EEA7 /* AppDelegate.m in Sources */,
 				38C80B1F1D0EB39300E0B01F /* WaitingTableViewCell.m in Sources */,

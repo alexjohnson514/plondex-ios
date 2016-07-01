@@ -43,16 +43,21 @@
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
 }
-- (IBAction)onBrowseVendors:(id)sender {
+#pragma mark Button Events
+- (IBAction)onBrowseUsers:(id)sender {
     UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
     [self dismissViewControllerAnimated:NO completion:nil];
     if([parentController.topViewController isMemberOfClass:[VendorDetailViewController class]]) {
         [parentController popViewControllerAnimated:NO];
     }
 }
-- (IBAction)onMyAccount:(id)sender {
+- (IBAction)onGoLive:(id)sender {
 }
 - (IBAction)onBuyPoints:(id)sender {
+}
+- (IBAction)onEarnedPoints:(id)sender {
+}
+- (IBAction)onSettings:(id)sender {
 }
 - (IBAction)onLogout:(id)sender {
     UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
@@ -61,6 +66,7 @@
     [Session logout];
 }
 
+#pragma mark Prevent Orientation Change
 -(BOOL)shouldAutorotate
 {
     return NO;

@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "pen_orange.png"
+      "filename" : "icon-edit-blue.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

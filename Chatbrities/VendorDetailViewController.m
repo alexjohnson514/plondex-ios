@@ -35,7 +35,7 @@
 @property (strong, nonatomic) SKYLINKConnection* skylinkConnection;
 
 @property (strong, nonatomic) NSString *roomName;
-@property (strong, nonatomic) UIImageView* profileImageView;
+@property (strong, nonatomic) UIButton* profileImageView;
 
 @end
 
@@ -72,11 +72,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+//Add profile image button to the center of navigation bar
+- (void)addTitleView {
+    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(-25, 25, 50, 50)];
+    [button addTarget:self action:@selector(onTapHeader:) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"header_icon"] forState:UIControlStateNormal];
+    self.navigationItem.titleView = button;
+    
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    profileImageView = self.navigationItem.titleView.subviews[0];
-    profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2;
+    [self addTitleView];
     
     [self loadToolbarImage];
     [self loadVendorImage];
@@ -122,11 +129,16 @@
     [self.skylinkConnection connectToRoomWithSecret:CONSTANT_SKYLINK_SECRET roomName:self.roomName userInfo:userInfo]; // a nickname could be sent here via userInfo cf the implementation of - (void)connection:(SKYLINKConnection*)connection didJoinPeer:(id)userInfo mediaProperties:(SKYLINKPeerMediaProperties*)pmProperties peerId:(NSString*)peerId
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    if(self.skylinkConnection != nil)
+        [self.skylinkConnection disconnect:nil];
+    [super viewWillDisappear:animated];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark - TableView Delegates
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 0;
@@ -179,6 +191,7 @@
         NSString* videoRoom = [message substringFromIndex:8];
         gApp.videoRoom = videoRoom;
         [self.skylinkConnection disconnect:^{
+            self.skylinkConnection = nil;
             [self performSegueWithIdentifier:@"moveToVideo" sender:self];
         }];
     } else {
@@ -228,12 +241,6 @@
     
 }
 
--(IBAction)talkTap:(id)sender {
-    NSString *message = [NSString stringWithFormat:@"[vtr]%@", 
-self.skylinkConnection.myPeerId];
-    [self.skylinkConnection sendDCMessage:message peerId:nil];
-}
-
 -(void)sendMessage:(NSString *)message forPeerId:(NSString *)peerId { // nil peerId means public message
     [self.skylinkConnection sendDCMessage:message peerId:peerId];
     self.messageTextField.text = @"";
@@ -252,13 +259,13 @@ self.skylinkConnection.myPeerId];
     if(![Session isLoggedIn]) return;
     NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [searchPaths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/profile", documentPath];
+    NSString *filePath = [NSString stringWithFormat:@"%@/profile%@", documentPath, [[Session loginData] objectForKey:KEY_USER_ID]];
     
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {
         UIImage* image = [[UIImage alloc] initWithContentsOfFile:filePath];
         dispatch_async(dispatch_get_main_queue(), ^{
-            profileImageView.image = image;
+            [profileImageView setImage:image forState:UIControlStateNormal];
         });
     } else {
         NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/50/50/1", SERVER_URL, API_PHOTO, [[Session loginData] objectForKey:KEY_USER_ID]]]];
@@ -270,7 +277,7 @@ self.skylinkConnection.myPeerId];
         }
         [data writeToFile:filePath atomically:NO];
         dispatch_async(dispatch_get_main_queue(), ^{
-            profileImageView.image = image;
+            [profileImageView setImage:image forState:UIControlStateNormal];
         });
     }
 }
@@ -304,11 +311,6 @@ self.skylinkConnection.myPeerId];
         });
     }
 }
-- (IBAction)signUpTap:(id)sender {
-    UINavigationController *nav = self.navigationController;
-    [nav popToRootViewControllerAnimated:NO];
-    [nav.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.navigationController.topViewController];
-}
 #pragma mark - NSNotification
 - (void)keyboardWillShow:(NSNotification*)notification {
     NSDictionary* info = [notification userInfo];
@@ -331,10 +333,29 @@ self.skylinkConnection.myPeerId];
 - (IBAction)onTapGesture:(id)sender {
     [self.messageTextField resignFirstResponder];
 }
+- (IBAction)onTapHeader:(id)sender {
+    if([[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_USER])
+    {
+        UINavigationController *parentController = (UINavigationController*)self.navigationController;
+        [parentController popToRootViewControllerAnimated:NO];
+        [parentController.topViewController performSegueWithIdentifier:@"loginVendorSegue" sender:parentController.topViewController];
+    } else if([[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_USER]) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+}
 - (IBAction)onSideMenu:(id)sender {
     if(![Session isLoggedIn])
         [self performSegueWithIdentifier:@"showLoginSideMenuSegue" sender:self];
     else
         [self performSegueWithIdentifier:@"showUserSideMenuSegue" sender:self];
 }
+- (IBAction)signUpTap:(id)sender {
+    [self onSideMenu:sender];
+}
+-(IBAction)talkTap:(id)sender {
+    NSString *message = [NSString stringWithFormat:@"[vtr]%@",
+                         self.skylinkConnection.myPeerId];
+    [self.skylinkConnection sendDCMessage:message peerId:nil];
+}
+
 @end

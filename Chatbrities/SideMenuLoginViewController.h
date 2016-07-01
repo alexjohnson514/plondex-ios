@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SideMenuLoginViewController : UIViewController<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@interface SideMenuLoginViewController : UIViewController
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
 @end

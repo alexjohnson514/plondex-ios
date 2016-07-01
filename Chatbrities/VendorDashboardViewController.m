@@ -78,7 +78,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 }
-
+- (void)viewWillDisappear:(BOOL)animated {
+    if(self.skylinkConnection != nil)
+        [self.skylinkConnection disconnect:nil];
+    [super viewWillDisappear:animated];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -247,6 +251,7 @@
             [self.skylinkConnection sendDCMessage:message peerId:peerId];
             gApp.videoRoom = jsonObject[KEY_CONVO_ID];
             [self.skylinkConnection disconnect:^{
+                self.skylinkConnection = nil;
                 [self performSegueWithIdentifier:@"moveToVideoFromVendor" sender:self];
                 [self.peers removeObjectForKey:peerId];
             }];
@@ -276,7 +281,8 @@
     if(![Session isLoggedIn]) return;
     NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [searchPaths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/profile", documentPath];
+    NSString *filePath = [NSString stringWithFormat:@"%@/profile%@", documentPath, [[Session loginData] objectForKey:KEY_USER_ID]];
+
     
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {
@@ -350,6 +356,17 @@
 
 - (IBAction)onTapGesture:(id)sender {
     [self.messageTextField resignFirstResponder];
+}
+- (IBAction)onTapHeader:(id)sender {
+    if([[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_USER])
+    {
+        UINavigationController *parentController = (UINavigationController*)self.navigationController;
+        [parentController popToRootViewControllerAnimated:NO];
+        [parentController.topViewController performSegueWithIdentifier:@"loginVendorSegue" sender:parentController.topViewController];
+    } else if([[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_USER]) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+
 }
 
 @end

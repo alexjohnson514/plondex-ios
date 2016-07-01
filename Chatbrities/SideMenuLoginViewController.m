@@ -53,70 +53,13 @@
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
 }
-- (IBAction)onLogin:(id)sender {
-    [indicator startAnimating];
-    [self.view endEditing:YES];
-    NSString *loginUrl = [[NSString stringWithFormat:@"%@%@/%@/%@?keygen=%@", SERVER_URL, API_LOGIN, _txtEmail.text,_txtPassword.text, AUTH_KEYGEN] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    loginUrl = [loginUrl stringByReplacingOccurrencesOfString:@"@" withString:@"%40"];
-    
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:loginUrl]];
-    [urlRequest setTimeoutInterval:30];
-    [urlRequest setHTTPMethod:@"GET"];
-    
-    NSLog(@"Nikolai : %s begin.", __FUNCTION__);
-    
-    [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        [indicator stopAnimating];
-        if (connectionError) {
-            [[[UIAlertView alloc] initWithTitle:@"Login failed" message:@"Can't connect to server." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-            NSLog(@"Nikolai : Login Failed.");
-        }
-        else{
-            NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if ([jsonObject[KEY_SUCCESS] intValue] != 1) {
-                [[[UIAlertView alloc] initWithTitle:@"Login failed" message:jsonObject[KEY_MESSAGE] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-            }
-            else{
-                NSLog(@"Nikolai : Login Successful.");
-                
-                UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
-                [parentController popToRootViewControllerAnimated:NO];
-                [self dismissViewControllerAnimated:NO completion:nil];
-                [Session setLoginDataWithData:jsonObject[KEY_DATA]];
-                if([jsonObject[KEY_DATA][KEY_USER_GROUP] isEqualToString: USERTYPE_VENDOR])
-                    [parentController.topViewController performSegueWithIdentifier:@"loginVendorSegue" sender:self.presentingViewController];
-                else
-                    [parentController.topViewController performSelectorInBackground:@selector(loadToolbarImage) withObject:nil];
-
-            }
-        }
-    }];
-}
+#pragma mark Login Actions
 - (IBAction)onFBLogin:(id)sender {
 }
-- (IBAction)onSignUpAsUser:(id)sender {
-    [Session setSignUpType:USERTYPE_USER];
-    UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
-    [parentController popToRootViewControllerAnimated:NO];
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [parentController.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.presentingViewController];
-}
-- (IBAction)onSignUpAsVendor:(id)sender {
-    [Session setSignUpType:USERTYPE_VENDOR];
-    UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
-    [parentController popToRootViewControllerAnimated:NO];
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [parentController.topViewController performSegueWithIdentifier:@"signUpSegue" sender:self.presentingViewController];
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField              // called when 'return' key pressed. return NO to ignore.
-{
-    if(textField == self.txtEmail)
-        return [self.txtPassword becomeFirstResponder];
-    else
-        [self onLogin:nil];
-    return [textField resignFirstResponder];
+- (IBAction)onTwitterLogin:(id)sender {
 }
 
+#pragma mark Prevent Screen Orientation
 -(BOOL)shouldAutorotate
 {
     return NO;

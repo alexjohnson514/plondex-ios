@@ -33,7 +33,7 @@
     indicator.hidesWhenStopped = YES;
     
     [self.view addSubview:indicator];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255.0/255 green:132.0/255 blue:0.0 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
     
     if([Session isLoggedIn] && [[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_VENDOR])
     {
@@ -89,7 +89,7 @@
     if(![Session isLoggedIn]) return;
     NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [searchPaths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/profile", documentPath];
+    NSString *filePath = [NSString stringWithFormat:@"%@/profile%@", documentPath, [[Session loginData] objectForKey:KEY_USER_ID]];
     
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {

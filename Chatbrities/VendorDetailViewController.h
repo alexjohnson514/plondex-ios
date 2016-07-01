@@ -12,5 +12,6 @@
 
 @interface VendorDetailViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, SKYLINKConnectionLifeCycleDelegate, SKYLINKConnectionMessagesDelegate, SKYLINKConnectionRemotePeerDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vendorDetailBar;
+@property (weak, nonatomic) IBOutlet UIButton *headerImage;
 
 @end
