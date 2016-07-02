@@ -338,16 +338,16 @@
     {
         UINavigationController *parentController = (UINavigationController*)self.navigationController;
         [parentController popToRootViewControllerAnimated:NO];
-        [parentController.topViewController performSegueWithIdentifier:@"loginVendorSegue" sender:parentController.topViewController];
+        [parentController.topViewController performSegueWithIdentifier:@"dashboard" sender:parentController.topViewController];
     } else if([[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_USER]) {
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
 }
 - (IBAction)onSideMenu:(id)sender {
     if(![Session isLoggedIn])
-        [self performSegueWithIdentifier:@"showLoginSideMenuSegue" sender:self];
+        [self performSegueWithIdentifier:@"side_menu_login" sender:self];
     else
-        [self performSegueWithIdentifier:@"showUserSideMenuSegue" sender:self];
+        [self performSegueWithIdentifier:@"side_menu" sender:self];
 }
 - (IBAction)signUpTap:(id)sender {
     [self onSideMenu:sender];

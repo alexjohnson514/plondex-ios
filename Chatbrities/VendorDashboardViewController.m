@@ -363,7 +363,7 @@
     {
         UINavigationController *parentController = (UINavigationController*)self.navigationController;
         [parentController popToRootViewControllerAnimated:NO];
-        [parentController.topViewController performSegueWithIdentifier:@"loginVendorSegue" sender:parentController.topViewController];
+        [parentController.topViewController performSegueWithIdentifier:@"dashboard" sender:parentController.topViewController];
     } else if([[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_USER]) {
         [self.navigationController popToRootViewControllerAnimated:NO];
     }

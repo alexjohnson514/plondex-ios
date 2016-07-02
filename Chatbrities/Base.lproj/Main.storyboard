@@ -225,7 +225,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="5dG-Hd-p6V"/>
                                     <constraint firstAttribute="centerY" secondItem="66d-fA-nVq" secondAttribute="centerY" constant="0.5" id="7vJ-th-ODD"/>
@@ -258,7 +258,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="kZz-mP-Jxd" firstAttribute="leading" secondItem="a3I-wK-YlK" secondAttribute="leading" id="8HV-ur-4pJ"/>
@@ -408,7 +408,7 @@
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="O39-DF-F94" firstAttribute="centerY" secondItem="sWW-j3-wwD" secondAttribute="centerY" id="10I-ko-nCc"/>
                                                         <constraint firstAttribute="trailing" secondItem="lbb-jq-VVS" secondAttribute="trailing" id="4gJ-d3-mvA"/>
@@ -493,10 +493,10 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="vendorListView" destination="SzO-fO-s1h" id="eVd-YG-zJ5"/>
-                        <segue destination="iQm-9q-2Vm" kind="show" identifier="loginVendorSegue" animates="NO" id="tfW-3f-6Mh"/>
-                        <segue destination="2oU-eJ-ocQ" kind="show" identifier="loginUserSegue" animates="NO" id="p7L-Ne-f43"/>
-                        <segue destination="2gb-ea-1ve" kind="presentation" identifier="showLoginSideMenuSegue" animates="NO" modalPresentationStyle="overFullScreen" id="cPu-ht-Mq1"/>
-                        <segue destination="SaC-nK-qA8" kind="presentation" identifier="showUserSideMenuSegue" animates="NO" modalPresentationStyle="overFullScreen" id="4P9-gn-x2q"/>
+                        <segue destination="iQm-9q-2Vm" kind="show" identifier="dashboard" animates="NO" id="tfW-3f-6Mh"/>
+                        <segue destination="2oU-eJ-ocQ" kind="show" identifier="user_detail" animates="NO" id="p7L-Ne-f43"/>
+                        <segue destination="2gb-ea-1ve" kind="presentation" identifier="side_menu_login" animates="NO" modalPresentationStyle="overFullScreen" id="cPu-ht-Mq1"/>
+                        <segue destination="SaC-nK-qA8" kind="presentation" identifier="side_menu" animates="NO" modalPresentationStyle="overFullScreen" id="4P9-gn-x2q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -632,7 +632,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="33j-kS-EY3" secondAttribute="trailing" constant="14" id="BjK-qY-NUC"/>
                                     <constraint firstAttribute="bottom" secondItem="ueO-7O-ovo" secondAttribute="bottom" constant="15" id="Ipb-Nu-WJR"/>
@@ -751,8 +751,8 @@
                         <outlet property="vendorName" destination="LP4-sn-IMJ" id="Vrj-jq-KO9"/>
                         <outlet property="vendorPhoto" destination="ahg-Ok-EhS" id="vr8-LK-kqc"/>
                         <segue destination="bxP-Ht-Ur2" kind="presentation" identifier="moveToVideo" animates="NO" id="Tw5-G9-hIr"/>
-                        <segue destination="2gb-ea-1ve" kind="presentation" identifier="showLoginSideMenuSegue" animates="NO" modalPresentationStyle="overFullScreen" id="g2R-Z5-OMw"/>
-                        <segue destination="SaC-nK-qA8" kind="presentation" identifier="showUserSideMenuSegue" animates="NO" modalPresentationStyle="overFullScreen" id="GMk-FG-8O1"/>
+                        <segue destination="2gb-ea-1ve" kind="presentation" identifier="side_menu_login" animates="NO" modalPresentationStyle="overFullScreen" id="g2R-Z5-OMw"/>
+                        <segue destination="SaC-nK-qA8" kind="presentation" identifier="side_menu" animates="NO" modalPresentationStyle="overFullScreen" id="GMk-FG-8O1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7EW-hL-P4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1036,7 +1036,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="HGC-vA-XHv" firstAttribute="top" secondItem="Ppd-LM-LxA" secondAttribute="bottom" constant="10" id="6E3-y1-0wz"/>
                             <constraint firstItem="Ppd-LM-LxA" firstAttribute="top" secondItem="QgR-ZM-mMz" secondAttribute="bottom" constant="8" id="Osv-6p-f8O"/>
@@ -1086,8 +1086,8 @@
         <image name="vendor_photo" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="GMk-FG-8O1"/>
         <segue reference="Tw5-G9-hIr"/>
         <segue reference="g2R-Z5-OMw"/>
-        <segue reference="yPI-bj-thL"/>
     </inferredMetricsTieBreakers>
 </document>

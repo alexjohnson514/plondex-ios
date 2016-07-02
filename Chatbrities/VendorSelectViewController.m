@@ -37,7 +37,7 @@
     
     if([Session isLoggedIn] && [[[Session loginData] objectForKey:KEY_USER_GROUP] isEqualToString:USERTYPE_VENDOR])
     {
-        [self performSegueWithIdentifier:@"loginVendorSegue" sender:self];
+        [self performSegueWithIdentifier:@"dashboard" sender:self];
     }
     
     self.vendorPhotoCache = [[NSMutableDictionary alloc] init];
@@ -63,9 +63,9 @@
 
 - (IBAction)onSideMenu:(UIBarButtonItem *)sender {
     if(![Session isLoggedIn])
-        [self performSegueWithIdentifier:@"showLoginSideMenuSegue" sender:self];
+        [self performSegueWithIdentifier:@"side_menu_login" sender:self];
     else
-        [self performSegueWithIdentifier:@"showUserSideMenuSegue" sender:self];
+        [self performSegueWithIdentifier:@"side_menu" sender:self];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.vendorList.count;
@@ -149,7 +149,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [Session setSelectedVendor:self.vendorList[indexPath.row]];
-    [self performSegueWithIdentifier:@"loginUserSegue" sender:self];
+    [self performSegueWithIdentifier:@"user_detail" sender:self];
 }
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     if(scrollView.contentOffset.y + scrollView.bounds.size.height> scrollView.contentSize.height && no_more == NO) {
