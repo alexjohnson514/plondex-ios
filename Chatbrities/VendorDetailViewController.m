@@ -268,7 +268,7 @@
             [profileImageView setImage:image forState:UIControlStateNormal];
         });
     } else {
-        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/50/50/1", SERVER_URL, API_PHOTO, [[Session loginData] objectForKey:KEY_USER_ID]]]];
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[[Session loginData] objectForKey:KEY_USER_PIC]]];
         UIImage* image = [[UIImage alloc] initWithData:data];
         
         if(image==nil) {
@@ -291,7 +291,7 @@
     
     if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {
-        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/%d/%d/1", SERVER_URL, API_PHOTO, vendorId, (int)vendorPhoto.frame.size.width, (int)vendorPhoto.frame.size.height]]];
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[[Session selectedVendor] objectForKey:KEY_USER_PIC]]];
         UIImage* image = [[UIImage alloc] initWithData:data];
         
         if(image==nil) {

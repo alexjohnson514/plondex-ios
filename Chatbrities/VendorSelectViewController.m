@@ -78,6 +78,7 @@
     VendorTableViewCell *cell = (VendorTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     cell.vendorId = [self.vendorList[indexPath.row] objectForKey:KEY_USER_ID];
     cell.vendorPhoto.image = [UIImage imageNamed:@"vendor_photo"];
+    cell.vendorPhotoUrl = [self.vendorList[indexPath.row] objectForKey:KEY_USER_PIC];
     [self performSelectorInBackground:@selector(loadImage:) withObject:cell];
     cell.vendorName.text = [NSString stringWithFormat:@"%@ %@", [self.vendorList[indexPath.row] objectForKey:KEY_USER_FIRSTNAME], [self.vendorList[indexPath.row] objectForKey:KEY_USER_LASTNAME]];
     NSString* cost = [self.vendorList[indexPath.row] objectForKey:KEY_USER_COST];
@@ -98,7 +99,7 @@
             profileImageView.image = image;
         });
     } else {
-        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/50/50/1", SERVER_URL, API_PHOTO, [[Session loginData] objectForKey:KEY_USER_ID]]]];
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[[Session loginData] objectForKey:KEY_USER_PIC]]];
         UIImage* image = [[UIImage alloc] initWithData:data];
         
         if(image==nil) {
@@ -121,8 +122,13 @@
     
     if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
     {
-        NSData *data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@/%d/%d/1", SERVER_URL, API_PHOTO, vendorId, (int)vendorPhoto.frame.size.width, (int)vendorPhoto.frame.size.height]]];
-        UIImage* image = [[UIImage alloc] initWithData:data];
+        NSData *data;
+        UIImage* image;
+        if(![cell.vendorPhotoUrl isMemberOfClass:NSClassFromString(@"NSNull")])
+        {
+            data = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:cell.vendorPhotoUrl]];
+            image = [[UIImage alloc] initWithData:data];
+        }
         
         if(image==nil) {
             image = [UIImage imageNamed:@"vendor_photo"];

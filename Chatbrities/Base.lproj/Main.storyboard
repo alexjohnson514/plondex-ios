@@ -30,12 +30,6 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
-            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -108,7 +102,7 @@
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9xb-LD-RbP">
                                 <rect key="frame" x="0.0" y="304" width="320" height="100"/>
-                                <color key="backgroundColor" red="1" green="0.51764705882352935" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="NdF-aV-dlx"/>
                                 </constraints>
@@ -223,7 +217,7 @@
                                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pen_orange" translatesAutoresizingMaskIntoConstraints="NO" id="66d-fA-nVq">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pen_blue" translatesAutoresizingMaskIntoConstraints="NO" id="66d-fA-nVq">
                                         <rect key="frame" x="192" y="20" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="KP8-Qc-SX1"/>
@@ -242,21 +236,21 @@
                                     <constraint firstItem="qnk-ww-GxZ" firstAttribute="leading" secondItem="66d-fA-nVq" secondAttribute="trailing" constant="10" id="lfY-IF-qor"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvd-fw-ZMm">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvd-fw-ZMm">
                                 <rect key="frame" x="265" y="479" width="55" height="45"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="TcZ-Iw-QNd"/>
                                     <constraint firstAttribute="width" constant="55" id="nT9-kg-p1G"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="send_im">
+                                <state key="normal" image="icon-send-white">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="processMessage:" destination="iQm-9q-2Vm" eventType="touchUpInside" id="HTZ-Ml-Ihj"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pen_white" translatesAutoresizingMaskIntoConstraints="NO" id="vSZ-Wj-hX7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pen_blue" translatesAutoresizingMaskIntoConstraints="NO" id="vSZ-Wj-hX7">
                                 <rect key="frame" x="290" y="74" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="gvc-c8-Zmc"/>
@@ -661,13 +655,14 @@
                                     <outlet property="delegate" destination="2oU-eJ-ocQ" id="kHe-Ta-nl8"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fg-Ac-ZiS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fg-Ac-ZiS">
                                 <rect key="frame" x="265" y="479" width="55" height="45"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="XTw-He-JH5"/>
                                     <constraint firstAttribute="height" constant="45" id="byR-Ou-dav"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="send_im">
+                                <state key="normal" image="icon-send-white">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -796,13 +791,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssy-Ak-iRQ">
                                 <rect key="frame" x="0.0" y="0.0" width="270" height="568"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-6F-vuQ">
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-6F-vuQ">
                                         <rect key="frame" x="20" y="50" width="230" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="6sH-ag-R0c"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="Browse Users">
+                                        <state key="normal" title="  Browser Users" image="icon-users-white">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -810,10 +804,9 @@
                                             <action selector="onBrowseUsers:" destination="SaC-nK-qA8" eventType="touchUpInside" id="HgW-bD-LHr"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6V-yN-goK">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6V-yN-goK">
                                         <rect key="frame" x="20" y="90" width="230" height="30"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="GO LIVE">
+                                        <state key="normal" title="  GO LIVE" image="icon-live-white">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -821,10 +814,9 @@
                                             <action selector="onGoLive:" destination="SaC-nK-qA8" eventType="touchUpInside" id="QY6-bM-qQ0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyD-hO-6Zp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyD-hO-6Zp">
                                         <rect key="frame" x="20" y="130" width="230" height="30"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="Buy Points">
+                                        <state key="normal" title="  Buy Points" image="icon-dollars-white">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -832,10 +824,9 @@
                                             <action selector="onBuyPoints:" destination="SaC-nK-qA8" eventType="touchUpInside" id="q4b-w5-M4E"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sD2-qF-ppz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sD2-qF-ppz">
                                         <rect key="frame" x="20" y="170" width="230" height="30"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="Earned Points">
+                                        <state key="normal" title="  Earned Points" image="icon-dollars-white">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -843,10 +834,9 @@
                                             <action selector="onEarnedPoints:" destination="SaC-nK-qA8" eventType="touchUpInside" id="RAg-Ki-zuW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W4-HT-els">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W4-HT-els">
                                         <rect key="frame" x="20" y="210" width="230" height="30"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="Settings">
+                                        <state key="normal" title="  Settings" image="icon-setting-white">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -854,10 +844,9 @@
                                             <action selector="onSettings:" destination="SaC-nK-qA8" eventType="touchUpInside" id="COf-PY-rx9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B0-iX-bie">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B0-iX-bie">
                                         <rect key="frame" x="20" y="250" width="230" height="30"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
-                                        <state key="normal" title="Logout">
+                                        <state key="normal" title="  Logout" image="icon-logout-white">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1086,15 +1075,19 @@
     </scenes>
     <resources>
         <image name="header_icon" width="206" height="205"/>
-        <image name="pen_orange" width="120" height="120"/>
-        <image name="pen_white" width="120" height="120"/>
-        <image name="send_im" width="168" height="172"/>
+        <image name="icon-dollars-white" width="20" height="20"/>
+        <image name="icon-live-white" width="20" height="20"/>
+        <image name="icon-logout-white" width="20" height="20"/>
+        <image name="icon-send-white" width="20" height="20"/>
+        <image name="icon-setting-white" width="20" height="20"/>
+        <image name="icon-users-white" width="20" height="20"/>
+        <image name="pen_blue" width="120" height="120"/>
         <image name="setting_nav_item" width="22" height="19"/>
         <image name="vendor_photo" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yPI-bj-thL"/>
-        <segue reference="cPu-ht-Mq1"/>
-        <segue reference="1hc-mc-16v"/>
+        <segue reference="GMk-FG-8O1"/>
+        <segue reference="Tw5-G9-hIr"/>
+        <segue reference="g2R-Z5-OMw"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,7 +17,7 @@
 #define API_LOGIN   @"/api/login"
 #define API_SIGNUP    @"/api/create_user"
 #define API_GET_USER @"/api/get_user"
-#define API_GET_VENDORS @"/api/get_vendors"
+#define API_GET_VENDORS @"/api/get_users"
 #define API_PHOTO   @"/photo/user"
 #define API_CREATE_CONVO    @"/Convo/createConvo"
 
