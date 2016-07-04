@@ -9,6 +9,7 @@
 #import "SideMenuUserViewController.h"
 #import "Session.h"
 #import "VendorDetailViewController.h"
+#import "VendorSelectViewController.h"
 
 @implementation SideMenuUserViewController
 
@@ -47,7 +48,7 @@
 - (IBAction)onBrowseUsers:(id)sender {
     UINavigationController* parentController = ((UINavigationController*)self.presentingViewController);
     [self dismissViewControllerAnimated:NO completion:nil];
-    if([parentController.topViewController isMemberOfClass:[VendorDetailViewController class]]) {
+    if(![parentController.topViewController isMemberOfClass:[VendorSelectViewController class]]) {
         [parentController popViewControllerAnimated:NO];
     }
 }

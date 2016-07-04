@@ -53,6 +53,26 @@
 	<array>
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Bold.ttf</string>
-	</array>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb486027691593996</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>486027691593996</string>
+    <key>FacebookDisplayName</key>
+    <string>Plunder Chat Application</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>

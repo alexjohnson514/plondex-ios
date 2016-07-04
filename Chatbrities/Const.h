@@ -20,6 +20,10 @@
 #define API_GET_VENDORS @"/api/get_users"
 #define API_PHOTO   @"/photo/user"
 #define API_CREATE_CONVO    @"/Convo/createConvo"
+#define API_GET_USER_BY_FACEBOOK_ID    @"/api/get_user_by_facebook"
+#define API_GET_USER_BY_TWITTER_ID    @"/api/get_user_by_twitter"
+#define API_CREATE_FACEBOOK_USER    @"/api/create_facebook_user"
+#define API_CREATE_TWITTER_USER    @"/api/create_twitter_user"
 
 #define REQUEST_COUNT   10
 
@@ -37,6 +41,7 @@
 #define KEY_USER_ROOM      @"u_room"
 #define KEY_USER_ID      @"u_id"
 #define KEY_USER_PIC      @"u_pic"
+#define KEY_USER_IS_VERIFIED      @"u_is_verified"
 #define KEY_USER_FILENAME      @"u_filename"
 #define KEY_USER_AT      @"u_at"
 #define KEY_USER_FACEBOOK      @"u_facebook"

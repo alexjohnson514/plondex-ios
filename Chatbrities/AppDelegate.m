@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 
 @interface AppDelegate ()
@@ -24,8 +25,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSessionRouteChange:) name:AVAudioSessionRouteChangeNotification object:nil]; // to set the speakers as default audio route
     
     signal(SIGPIPE, SIG_IGN); // Resolve SIGPIPE, as sugested by Apple doc.
-
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:sourceApplication
+                                                               annotation:annotation
+                    ];
+    // Add any custom logic here.
+    return handled;
 }
 
 - (void)didSessionRouteChange:(NSNotification *)notification

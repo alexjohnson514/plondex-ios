@@ -27,6 +27,10 @@
 		38C80B1F1D0EB39300E0B01F /* WaitingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B1E1D0EB39300E0B01F /* WaitingTableViewCell.m */; };
 		38C80B221D0EB3E400E0B01F /* VendorDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */; };
 		38EF76951D0C8D110082C80F /* SideMenuLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */; };
+		38FCF7BD1D2AA70300CD1A51 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FCF7BA1D2AA70200CD1A51 /* FBSDKCoreKit.framework */; };
+		38FCF7BE1D2AA70300CD1A51 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FCF7BB1D2AA70300CD1A51 /* FBSDKLoginKit.framework */; };
+		38FCF7BF1D2AA70300CD1A51 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FCF7BC1D2AA70300CD1A51 /* FBSDKShareKit.framework */; };
+		38FCF7C21D2AC19C00CD1A51 /* NSString+URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FCF7C11D2AC19C00CD1A51 /* NSString+URLEncode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +69,10 @@
 		38C80B211D0EB3E400E0B01F /* VendorDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VendorDashboardViewController.m; sourceTree = "<group>"; };
 		38EF76931D0C8D110082C80F /* SideMenuLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuLoginViewController.h; sourceTree = "<group>"; };
 		38EF76941D0C8D110082C80F /* SideMenuLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuLoginViewController.m; sourceTree = "<group>"; };
+		38FCF7BA1D2AA70200CD1A51 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		38FCF7BB1D2AA70300CD1A51 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		38FCF7BC1D2AA70300CD1A51 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		38FCF7C11D2AC19C00CD1A51 /* NSString+URLEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncode.m"; sourceTree = "<group>"; };
 		7518B312489765F15D2AF276 /* Pods-Chatbrities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatbrities.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chatbrities/Pods-Chatbrities.release.xcconfig"; sourceTree = "<group>"; };
 		8697FF8DA083285D3A0A8057 /* Pods-Chatbrities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatbrities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chatbrities/Pods-Chatbrities.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,7 +82,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FCF7BF1D2AA70300CD1A51 /* FBSDKShareKit.framework in Frameworks */,
 				1D6009AF92170A0EBFDA401B /* libPods-Chatbrities.a in Frameworks */,
+				38FCF7BD1D2AA70300CD1A51 /* FBSDKCoreKit.framework in Frameworks */,
+				38FCF7BE1D2AA70300CD1A51 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +104,9 @@
 		29271850A071EE4CF1335B75 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38FCF7BA1D2AA70200CD1A51 /* FBSDKCoreKit.framework */,
+				38FCF7BB1D2AA70300CD1A51 /* FBSDKLoginKit.framework */,
+				38FCF7BC1D2AA70300CD1A51 /* FBSDKShareKit.framework */,
 				1DB8B10045335357D1A6FAD8 /* libPods-Chatbrities.a */,
 			);
 			name = Frameworks;
@@ -147,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				38C80B171D0E3C3400E0B01F /* UITextField+LeftPadding.m */,
+				38FCF7C11D2AC19C00CD1A51 /* NSString+URLEncode.m */,
 			);
 			name = CustomControl;
 			sourceTree = "<group>";
@@ -348,6 +363,7 @@
 				38C46B1F1D0EEC75000F5E5F /* SideMenuUserViewController.m in Sources */,
 				38EF76951D0C8D110082C80F /* SideMenuLoginViewController.m in Sources */,
 				38C80B221D0EB3E400E0B01F /* VendorDashboardViewController.m in Sources */,
+				38FCF7C21D2AC19C00CD1A51 /* NSString+URLEncode.m in Sources */,
 				38C80B151D0DCD6700E0B01F /* ChatViewController.m in Sources */,
 				3884759E1D11C06F00EACC96 /* CustomUINavigationController.m in Sources */,
 				38C80B121D0DB61E00E0B01F /* Session.m in Sources */,
@@ -475,6 +491,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tuan Nguyen (8C28669M4Q)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Chatbrities/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Chatbrities;
@@ -487,6 +507,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Tuan Nguyen (8C28669M4Q)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Chatbrities/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Chatbrities;
